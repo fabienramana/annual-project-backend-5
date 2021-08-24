@@ -1,14 +1,13 @@
 const db = require('../../../client/mysql')
 
 module.exports = () => {    
-    return new Promise(function(resolve, reject)  {
-        db.query("SELECT * FROM utilisateur",(err, res) => {
-            if(err){
-                db.end()
-                return reject(err);
+    return new Promise(function(resolve,reject){
+        var userQuery = "SELECT * FROM utilisateur";
+        db.query(userQuery, function(err,result){
+            if(result.length > 0){
+                resolve(result)
             }
-            db.end()
-            resolve(res);
+            reject(err)
         })
     })
 }

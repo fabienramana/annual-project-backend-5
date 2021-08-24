@@ -1,10 +1,7 @@
 const mysql = require('mysql')
+const { Sequelize } = require('sequelize')
 
-// db name : annualproject5
 
-// https://riptutorial.com/node-js/example/29792/export-connection-pool
-
-// https://github.com/sidorares/node-mysql2#history-and-why-mysql2
 const conn = mysql.createConnection({
     host: "localhost",
     user: "fabien",
@@ -19,12 +16,37 @@ conn.connect(error => {
 
 module.exports = conn;
 /*
-const pool = mysql.createPool({
-    host            : 'localhost',
-    user            : 'fabien',
-    password        : 'fabien',
-    database        : 'annualproject5'
+var pool  = mysql.createPool({
+    host: "localhost",
+    user: "fabien",
+    password: "fabien",
+    database: "annualproject5"
 });
-
-module.export = pool.promise();
+var getConnection = function (cb) {
+    pool.getConnection(function (err, connection) {
+        //if(err) throw err;
+        //pass the error to the cb instead of throwing it
+        if(err) {
+          return cb(err);
+        }
+        cb(null, connection);
+    });
+};
+module.exports = getConnection;
 */
+/*
+const sequelize = new Sequelize('annualproject5', 'fabien', 'fabien', {
+    host: 'localhost',
+    dialect: 'mysql'
+  });
+
+
+  try {
+    sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+    sequelize.query('SELECT * FROM utilisateur WHERE email = "fabien.rmnd@gmail.com"').then(([results, metadata]) => {
+        console.log(results);
+      })
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  } */
