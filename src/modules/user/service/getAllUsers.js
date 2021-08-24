@@ -8,7 +8,7 @@ module.exports = () => {
                 return reject(err);
             }
             db.end()
-            resolve(res[0]);
+            resolve(res);
         })
     })
 }
