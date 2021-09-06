@@ -30,10 +30,11 @@ module.exports = (nom, prenom, email, password, adresse, date_naissance, code_po
         return new Promise(function(resolve, reject) {
             connect.query(`INSERT INTO utilisateur (nom, prenom, email, date_naissance, password, adresse, code_postal, ville) VALUES ("${nom}","${prenom}","${email}", "${date_naissance}","${encryptedPassword}","${adresse}","${code_postal}","${ville}")`, function(err, result){
                 if (err) {
-                    connect.end()
-                    reject(err);
+                    const erreur = new Error(err);
+                    erreur.name = 'Internal Error';
+                    erreur.status = 500;
+                    throw erreur;
                 }
-                connect.end()
                 resolve(email)  
             })
         })

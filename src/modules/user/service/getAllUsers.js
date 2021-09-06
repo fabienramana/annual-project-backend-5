@@ -7,7 +7,11 @@ module.exports = () => {
             if(result.length > 0){
                 resolve(result)
             }
-            reject(err)
+            //reject(err)
+            const erreur = new Error(err);
+            erreur.name = 'Internal Error';
+            erreur.status = 500;
+            throw erreur;
         })
     })
 }

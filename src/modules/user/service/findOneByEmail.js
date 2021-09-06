@@ -7,7 +7,11 @@ module.exports = (email) => {
             if(result.length > 0){
                 resolve(result[0])
             }
-            reject(err)
+            //reject(err)
+            const erreur = new Error(err);
+            erreur.name = 'Internal Error';
+            erreur.status = 500;
+            throw erreur;
         })
     })
 }
