@@ -1,6 +1,6 @@
 const { categorieModel } = require('../../models/categorieModel')
 const connect =  require('../../../client/mysql');
-const checkIfLibelléExists = require('./checkIfLibelléExists')
+const checkIfLibelléExists = require('./checkIfLibelleExists')
 
 module.exports = (libellé) => {
 
