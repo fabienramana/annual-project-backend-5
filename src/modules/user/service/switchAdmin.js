@@ -4,16 +4,15 @@ const findOneById = require('./findOneById')
 module.exports = (id) => {
     return findOneById(id)
     .then((user)=>{
-        
         var userToUpdate;
-        if(user.estMarchand == false){
+        if(user.estAdmin == false){
             userToUpdate = {
-                estMarchand: true
+                estAdmin: true
             }
         }
         else{
             userToUpdate = {
-                estMarchand: false
+                estAdmin: false
             }
         }
         return userToUpdate;
