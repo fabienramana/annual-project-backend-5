@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt')
-const Joi = require('@hapi/joi');
 const { createModel } = require('../../models/userModel')
 const connect =  require('../../../client/mysql');
 const checkIfEmailExists = require('./checkIfEmailExists')
@@ -29,12 +28,9 @@ module.exports = (nom, prenom, email, password, adresse, date_naissance, code_po
     .then(function() {
         return new Promise(function(resolve, reject) {
             connect.query(`INSERT INTO utilisateur (nom, prenom, email, date_naissance, password, adresse, code_postal, ville) VALUES ("${nom}","${prenom}","${email}", "${date_naissance}","${encryptedPassword}","${adresse}","${code_postal}","${ville}")`, function(err, result){
-                if (err) {
-                    const erreur = new Error(err);
-                    erreur.name = 'Internal Error';
-                    erreur.status = 500;
-                    throw erreur;
-                }
+                db.on('error', function(err){
+                    reject (err)
+                })
                 resolve(email)  
             })
         })

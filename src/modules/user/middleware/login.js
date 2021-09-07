@@ -4,11 +4,12 @@ const findOneByEmail = require('../service/findOneByEmail')
 
 module.exports = (req, res, next) => {
     console.log(req.body.email)
+    const email = req.body.email
     findOneByEmail(req.body.email)
     .then((user) => {
         bcrypt.compare(req.body.password, user.password, (err, res2)=> {
             if (res2 === true) {
-                jwt.sign({ user }, 'secretKey', { expiresIn: '1440m' }, (errJWT, token) => {
+                jwt.sign({ email }, 'secretKey', { expiresIn: '1440m' }, (errJWT, token) => {
                     res.json({
                         token,
                     });
