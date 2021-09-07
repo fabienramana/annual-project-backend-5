@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
     createUser(nom, prenom, email, password, adresse, date_naissance, code_postal, ville)
         .then((user) => {
         jwt.sign({ user }, 'secretKey', { expiresIn: '1440m' }, (errJWT, token) => {
-            res.json({
+            res.status(201).json({
             /*_id: user._id, // eslint-disable-line no-underscore-dangle
             firstname: user.firstname,
             lastname: user.lastname,
