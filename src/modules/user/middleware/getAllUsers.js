@@ -1,4 +1,4 @@
-const getAllUsers = require('../../user/service/getAllUsers');
+const getAllUsers = require('../service/getAllUsers');
 
 module.exports = (req, res, next) => {
     getAllUsers()
