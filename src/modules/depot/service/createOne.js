@@ -12,7 +12,7 @@ module.exports = (libellé, adresse, code_postal, ville) => {
     }
 
     return createModel.validate(depot)
-    .then(checkIfLibelléExists(libellé))
+    .then(() => checkIfLibelléExists(libellé))
     .then(function(){
         return new Promise(function(resolve, reject){
             var query = `INSERT INTO depot (libellé, adresse, code_postal, ville) VALUES ("${libellé}", "${adresse}", "${code_postal}", "${ville}")`
