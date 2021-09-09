@@ -11,7 +11,7 @@ module.exports = (libellé) => {
     return categorieModel.validate({
         libellé
     })
-    .then(checkIfLibelléExists(libellé))
+    .then(() => checkIfLibelléExists(libellé))
     .then(function() {
         return new Promise(function(resolve, reject) {
             connect.query(`INSERT INTO categorie (libellé) VALUES ("${libellé}")`, function(err, result){

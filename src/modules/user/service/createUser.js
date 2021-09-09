@@ -24,7 +24,7 @@ module.exports = (nom, prenom, email, password, adresse, date_naissance, code_po
           ville
       }
     return createModel.validate(user)
-    .then(checkIfEmailExists(email))
+    .then(() => checkIfEmailExists(email))
     .then(function() {
         return new Promise(function(resolve, reject) {
             connect.query(`INSERT INTO utilisateur (nom, prenom, email, date_naissance, password, adresse, code_postal, ville) VALUES ("${nom}","${prenom}","${email}", "${date_naissance}","${encryptedPassword}","${adresse}","${code_postal}","${ville}")`, function(err, result){
