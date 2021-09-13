@@ -1,10 +1,10 @@
 const updateOne = require('../service/updateOne');
 
 module.exports = (req, res, next) => {
-    const { libellé } = req.body;
+    const { libelle } = req.body;
     const { id } = req.params;
 
-    updateOne(libellé, id)
+    updateOne(libelle, id)
         .then((categorie) => {
             res.json({
                 categorie

@@ -1,21 +1,21 @@
 const { createModel } = require('../../models/depotModel')
 const connect =  require('../../../client/mysql');
-const checkIfLibelléExists = require('./checkIfLibelleExists')
+const checkIfLibelleExists = require('./checkIfLibelleExists')
 
-module.exports = (libellé, adresse, code_postal, ville) => {
+module.exports = (libelle, adresse, code_postal, ville) => {
 
     const depot = {
-        libellé,
+        libelle,
         adresse,
         code_postal,
         ville
     }
 
     return createModel.validate(depot)
-    .then(() => checkIfLibelléExists(libellé))
+    .then(() => checkIfLibelleExists(libelle))
     .then(function(){
         return new Promise(function(resolve, reject){
-            var query = `INSERT INTO depot (libellé, adresse, code_postal, ville) VALUES ("${libellé}", "${adresse}", "${code_postal}", "${ville}")`
+            var query = `INSERT INTO depot (libelle, adresse, code_postal, ville) VALUES ("${libelle}", "${adresse}", "${code_postal}", "${ville}")`
             connect.query(query, function(err, result){
                 if(err) reject(err)
                 console.log(result)

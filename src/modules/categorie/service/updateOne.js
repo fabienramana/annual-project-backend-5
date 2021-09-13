@@ -2,14 +2,14 @@ const { categorieModel } = require('../../models/categorieModel')
 const connect =  require('../../../client/mysql');
 const findOneById = require('./findOneById')
 
-module.exports = (libellé, id) => {
+module.exports = (libelle, id) => {
 
     const categorie = {
-        libellé
+        libelle
     }
 
     return categorieModel.validate({
-        libellé
+        libelle
     })
     .then(function() {
         return new Promise(function(resolve, reject) {

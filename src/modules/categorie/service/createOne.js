@@ -1,20 +1,20 @@
 const { categorieModel } = require('../../models/categorieModel')
 const connect =  require('../../../client/mysql');
-const checkIfLibelléExists = require('./checkIfLibelleExists')
+const checkIfLibelleExists = require('./checkIfLibelleExists')
 
-module.exports = (libellé) => {
+module.exports = (libelle) => {
 
     const categorie = {
-        libellé
+        libelle
     }
 
     return categorieModel.validate({
-        libellé
+        libelle
     })
-    .then(() => checkIfLibelléExists(libellé))
+    .then(() => checkIfLibelleExists(libelle))
     .then(function() {
         return new Promise(function(resolve, reject) {
-            connect.query(`INSERT INTO categorie (libellé) VALUES ("${libellé}")`, function(err, result){
+            connect.query(`INSERT INTO categorie (libelle) VALUES ("${libelle}")`, function(err, result){
                 if(err) reject(err)
                 console.log(result)
                 if(result.affectedRows == 1)resolve('created')

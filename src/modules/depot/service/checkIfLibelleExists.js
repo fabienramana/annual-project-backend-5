@@ -1,10 +1,10 @@
 const db = require('../../../client/mysql')
 
-module.exports = (libellé) => {    
+module.exports = (libelle) => {    
     return new Promise(function(resolve, reject)  {
-        db.query('SELECT * FROM depot WHERE libellé = ?', libellé, function(error, results, fields){
+        db.query('SELECT * FROM depot WHERE libelle = ?', libelle, function(error, results, fields){
             if(results != null){
-                reject(new Error('Libellé already exists'))
+                reject(new Error('Libelle already exists'))
             }
             if(error){
                 reject(error)

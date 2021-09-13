@@ -1,7 +1,7 @@
 const joi = require('@hapi/joi');
 
 const categorieModel = joi.object({
-    libellé: joi.string().required()
+    libelle: joi.string().required()
 });
 
 
