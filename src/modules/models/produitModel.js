@@ -1,6 +1,7 @@
 const joi = require('@hapi/joi');
 
 const createModel = joi.object({
+    titre: joi.string().required(),
     description: joi.string().required(),
     etat: joi.string().required(),
     statut: joi.string().required(),
@@ -9,6 +10,7 @@ const createModel = joi.object({
 });
 
 const updateModel = joi.object({
+    titre: joi.string(),
     description: joi.string(),
     etat: joi.string(),
     statut: joi.string(),

@@ -9,7 +9,7 @@ module.exports = (product, carac_tech) => {
     .then(function(){
         return new Promise(function(resolve, reject){
             console.log("query")
-            var query = `INSERT INTO produit (description, etat, statut, categorie_id, depot_id) VALUES ("${product.description}", "${product.etat}", "${product.statut}", ${product.categorie_id}, ${product.depot_id})`
+            var query = `INSERT INTO produit (titre, description, etat, statut, categorie_id, depot_id) VALUES ("${product.titre}", "${product.description}", "${product.etat}", "${product.statut}", ${product.categorie_id}, ${product.depot_id})`
             connect.query(query, function(err, result){
                 console.log(result)
                 console.log(err)
