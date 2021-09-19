@@ -5,15 +5,15 @@ module.exports = async (req, res, next) => {
     const ids = req.ids;
     const itemsToGet = null;  // get items by ids [0,2,3,.....]
     const items = [];
-    itemsToGet.array.forEach(item => {
-        const item = 
+    itemsToGet.array.forEach(obj => {
+        let item = 
         {
             price_data: {
                 currency: 'eur',
                 product_data: {
-                    name: item.libelle
+                    name: obj.libelle
                 },
-                unit_amount: item.prix
+                unit_amount: obj.prix
             },
             quantity: 1
         }
