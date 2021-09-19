@@ -6,8 +6,8 @@ module.exports = async (data) => {
         payment_method_types: ['card'],
         line_items: data,
         mode: 'payment',
-        success_url: 'localhost:8080/paiement/success',
-        cancel_url: 'localhost:8080/paiement/error',
+        success_url: 'http://localhost:4200/paiement/success',
+        cancel_url: 'http://localhost:4200/paiement/error',
     });
 
     console.log(session.url)
