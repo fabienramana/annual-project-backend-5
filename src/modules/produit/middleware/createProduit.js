@@ -1,6 +1,7 @@
 const createOne = require('../service/createProduit');
 
 module.exports = (req, res, next) => {
+    const { titre } = req.body;
     const { description } = req.body;
     const { etat } = req.body;
     const { categorie_id } = req.body;
@@ -10,6 +11,7 @@ module.exports = (req, res, next) => {
     const { caracteristiques_tech_id } = req.body;
 
     const product = {
+        titre,
         description,
         etat,
         statut: "Non valide",
