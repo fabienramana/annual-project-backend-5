@@ -1,17 +1,17 @@
 const { Router } = require('express');
 const createOne = require('./middleware/createOne');
+const findByProduit = require('./middleware/findByProduit');
 const updateOne = require('./middleware/updateOne');
-const findByUser = require('./middleware/findByUser');
 
 const router = new Router();
 
-router.route('/green_coin')
+router.route('/image')
 .post(createOne);
 
-router.route('/green_coin/:id')
-.put(updateOne);
+router.route('/image/:id')
+.put(updateOne)
 
-router.route('/green_coin/user/:id')
-.get(findByUser)
+router.route('/image/produit/:id')
+.get(findByProduit)
 
 module.exports = router;
