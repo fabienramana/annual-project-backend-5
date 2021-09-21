@@ -5,8 +5,9 @@ module.exports = async (req, res, next) => {
     const ids = req.ids;
     const itemsToGet = null;  // get items by ids [0,2,3,.....]
     const items = [];
+    let item;
     itemsToGet.array.forEach(item => {
-        const item = 
+        item = 
         {
             price_data: {
                 currency: 'eur',
