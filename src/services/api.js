@@ -17,6 +17,7 @@ const investmentRouter = require('../modules/invest_green_coin/router')
 const projetRouter = require('../modules/projet/router')
 const associationRouter = require('../modules/association/router')
 const evenementRouter = require('../modules/evenement/router')
+const venteRouter = require('../modules/vente/router')
 
 
 const router = new Router();
@@ -38,5 +39,6 @@ router.use('/api', investmentRouter)
 router.use('/api', projetRouter)
 router.use('/api', associationRouter)
 router.use('/api', evenementRouter)
+router.use('/api', venteRouter)
 
 module.exports = router;
