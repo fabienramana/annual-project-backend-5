@@ -1,6 +1,6 @@
 const db = require('../../../client/mysql')
 
-module.exports = () => {    
+module.exports = async () => {   
     return new Promise(function(resolve,reject){
         var userQuery = "SELECT * FROM caracteristiques_technique";
         db.query(userQuery, function(err,result){
