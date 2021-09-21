@@ -9,7 +9,7 @@ const checkIfRnaExistsBase = require('./checkIfRnaExistsBase');
 module.exports = (nom, rna, email, password) => {
 
     if (password == null) {
-        const err = new Error('Password is not set');
+        const err = new Error("Aucun password n'est défini");
         err.name = 'Internal Error';
         err.status = 500;
         throw err;

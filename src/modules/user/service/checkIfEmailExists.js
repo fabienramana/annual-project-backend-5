@@ -5,7 +5,7 @@ module.exports = (email) => {
         db.query('SELECT * FROM utilisateur WHERE email = ?', email, function(error, results, fields){
             console.log(results)
             if(results != null && results.length > 0){
-                    reject(new Error('Email already exists'))
+                    reject(new Error("L'email existe déjà"))
             }
             if(error){
                 reject(error)

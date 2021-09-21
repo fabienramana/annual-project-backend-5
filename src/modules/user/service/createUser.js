@@ -7,7 +7,7 @@ const checkIfAssociationEmailExists = require('../../association/service/checkIf
 module.exports = (nom, prenom, email, password, adresse, date_naissance, code_postal, ville) => {
 
     if (password == null) {
-        const err = new Error('Password is not set');
+        const err = new Error("Aucun password n'est défini");
         err.name = 'Internal Error';
         err.status = 500;
         throw err;

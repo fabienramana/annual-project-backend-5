@@ -5,7 +5,7 @@ module.exports = (numero) => {
         db.query('SELECT * FROM colis WHERE numero = ?', numero, function(error, results, fields){
             console.log(results)
             if(results != null && results.length > 0){
-                    reject(new Error('Numero already exists'))
+                    reject(new Error("Le numéro existe déjà"))
             }
             if(error){
                 reject(error)

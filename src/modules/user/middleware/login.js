@@ -16,11 +16,11 @@ module.exports = (req, res, next) => {
                 });
             } else if (res2 === false) {
                 res.json({
-                    error: 'Error authenticating',
+                    error: "Erreur lors de l'authentification",
                 });
             } else if (err) {
                 res.json({
-                    error: 'Error authenticating',
+                    error: "Erreur lors de l'authentification",
                 });
             }
         });
