@@ -15,6 +15,8 @@ const achatProduiRouter = require('../modules/achat_produit/router')
 const imageRouter = require('../modules/image/router')
 const investmentRouter = require('../modules/invest_green_coin/router')
 const projetRouter = require('../modules/projet/router')
+const associationRouter = require('../modules/association/router')
+const evenementRouter = require('../modules/evenement/router')
 
 
 const router = new Router();
@@ -34,5 +36,7 @@ router.use('/api', achatProduiRouter)
 router.use('/api', imageRouter)
 router.use('/api', investmentRouter)
 router.use('/api', projetRouter)
+router.use('/api', associationRouter)
+router.use('/api', evenementRouter)
 
 module.exports = router;

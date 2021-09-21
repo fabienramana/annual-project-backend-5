@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const { createModel } = require('../../models/userModel')
 const connect =  require('../../../client/mysql');
 const checkIfEmailExists = require('./checkIfEmailExists')
+const checkIfAssociationEmailExists = require('../../association/service/checkIfEmailExists')
 
 module.exports = (nom, prenom, email, password, adresse, date_naissance, code_postal, ville) => {
 
@@ -25,6 +26,7 @@ module.exports = (nom, prenom, email, password, adresse, date_naissance, code_po
       }
     return createModel.validate(user)
     .then(() => checkIfEmailExists(email))
+    .then(() => checkIfAssociationEmailExists(email))
     .then(function() {
         return new Promise(function(resolve, reject) {
             connect.query(`INSERT INTO utilisateur (nom, prenom, email, date_naissance, password, adresse, code_postal, ville) VALUES ("${nom}","${prenom}","${email}", "${date_naissance}","${encryptedPassword}","${adresse}","${code_postal}","${ville}")`, function(err, result){
