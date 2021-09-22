@@ -1,7 +1,7 @@
 const { createModel } = require('../../models/produitCaracModel')
 const connect =  require('../../../client/mysql');
 
-module.exports = (carac_tech) => {
+module.exports = async (carac_tech) => {
 
     return createModel.validate(carac_tech)
     .then(function(){

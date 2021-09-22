@@ -1,7 +1,7 @@
 const { createModel } = require('../../models/venteModel')
 const connect =  require('../../../client/mysql');
 
-module.exports = (vente) => {
+module.exports = async (vente) => {
 
     return createModel.validate(vente)
     .then(function(){

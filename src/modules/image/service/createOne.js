@@ -1,7 +1,7 @@
 const { createModel } = require('../../models/imageModel')
 const connect =  require('../../../client/mysql');
 
-module.exports = (image) => {
+module.exports = async (image) => {
 
     return createModel.validate(image)
     .then(function(){

@@ -1,7 +1,7 @@
 const { createModel } = require('../../models/produitModel')
 const connect =  require('../../../client/mysql');
 
-module.exports = (product) => {
+module.exports = async (product) => {
 
     console.log(product)
     return createModel.validate(product)
