@@ -1,7 +1,9 @@
-const { getAll } = require('../repository');
+const { getAllByUser } = require('../repository');
 
 module.exports = (req, res, next) => {
-    getAll()
+    const { id } = req.params;
+    
+    getAllByUser(id)
     .then((achats) => {
         res.json(achats);
     })

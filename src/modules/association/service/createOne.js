@@ -1,10 +1,12 @@
 const { createModel } = require('../../models/associationModel')
 const connect =  require('../../../client/mysql');
 const bcrypt = require('bcrypt');
-const checkIfEmailExists = require('./checkIfEmailExists');
-const checkIfUserEmailExists = require('../../user/service/checkIfEmailExists');
+//const checkIfEmailExists = require('./checkIfEmailExists');
+//const checkIfUserEmailExists = require('../../user/service/checkIfEmailExists');
+//const checkIfRnaExistsBase = require('./checkIfRnaExistsBase');
 const checkIfRnaExistsAPI = require('./checkIfRnaExistsAPI');
-const checkIfRnaExistsBase = require('./checkIfRnaExistsBase');
+const { findIfRnaExistsBase, findIfEmailExists, createAssociation } = require('../repository');
+const { findIfEmailExists: findIfUserEmailExists } = require('../../user/repository')
 
 module.exports = (nom, rna, email, password) => {
 
@@ -24,20 +26,9 @@ module.exports = (nom, rna, email, password) => {
     }
 
     return createModel.validate(association)
-    .then(() => checkIfEmailExists(email))
-    .then(() => checkIfUserEmailExists(email))
+    .then(() => findIfEmailExists(email))
+    .then(() => findIfUserEmailExists(email))
     .then(() => checkIfRnaExistsAPI(rna))
-    .then(() => checkIfRnaExistsBase(rna))
-    .then(function(){
-        return new Promise(function(resolve, reject){
-            var query = `INSERT INTO association (nom, rna, email, password) VALUES ("${nom}", "${rna}", "${email}", "${encryptedPassword}")`
-            connect.query(query, function(err, result){
-                console.log(result)
-                console.log(err)
-                if(err) reject(err)
-                if(result.affectedRows == 1)resolve('created')
-            })
-            
-        })
-    })
+    .then(() => findIfRnaExistsBase(rna))
+    .then(() => createAssociation(nom, rna, email, encryptedPassword))
 }

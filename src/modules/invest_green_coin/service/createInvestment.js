@@ -33,7 +33,6 @@ module.exports = (investment, email) => {
                     console.log("equal")
                     createOne(green_coins[i].montant_restant, investment.projet_id, green_coins[i].id)
                     .then((message) => console.log(message))
-                    //query += `INSERT INTO invest_green_coin (amount, projet_id, green_coin_id) VALUES (${green_coins[i].montant_restant}, ${investment.projet_id}, ${green_coins[i].id});`
                     investment.amount -= green_coins[i].montant_restant 
                     updateGreenCoin({
                         montant_restant: 0
@@ -43,7 +42,6 @@ module.exports = (investment, email) => {
                 }
                 else if(green_coins[i].montant_restant > investment.amount){
                     console.log('green_coins[i].montant_restant > investment.amount')
-                    //query += `INSERT INTO invest_green_coin (amount, projet_id, green_coin_id) VALUES (${investment.amount}, ${investment.projet_id}, ${green_coins[i].id});`
                     createOne(investment.amount, investment.projet_id, green_coins[i].id)
                     .then((message) => console.log(message))
                     updateGreenCoin({
@@ -55,7 +53,6 @@ module.exports = (investment, email) => {
                 }
                 else if(green_coins[i].montant_restant < investment.amount){
                     console.log("green_coins[i].montant_restant < investment.amount")
-                    //query += `INSERT INTO invest_green_coin (amount, projet_id, green_coin_id) VALUES (${green_coins[i].montant_restant}, ${investment.projet_id}, ${green_coins[i].id});`
                     createOne(green_coins[i].montant_restant, investment.projet_id, green_coins[i].id)
                     .then((message) => console.log(message))
                     investment.amount -= green_coins[i].montant_restant

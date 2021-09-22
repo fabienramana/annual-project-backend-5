@@ -1,12 +1,12 @@
-const findByProduitId = require('../service/findByProduitId');
+const { findByProduitId } = require('../repository');
 
 module.exports = (req, res, next) => {
     const { id } = req.params
 
     findByProduitId(id)
-    .then((achats) => {
+    .then((achats_produits) => {
         res.json({
-            achats
+            achats_produits
         })
     })
     .catch((err)=> {

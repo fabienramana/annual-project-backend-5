@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 const { createModel } = require('../../models/userModel')
 const connect =  require('../../../client/mysql');
 const checkIfEmailExists = require('./checkIfEmailExists')
-const checkIfAssociationEmailExists = require('../../association/service/checkIfEmailExists')
+const {findIfEmailExists: checkIfAssociationEmailExists} = require('../../association/repository')
 
 module.exports = (nom, prenom, email, password, adresse, date_naissance, code_postal, ville) => {
 

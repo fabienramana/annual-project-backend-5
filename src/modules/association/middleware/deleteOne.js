@@ -1,4 +1,4 @@
-const deleteOne = require('../service/deleteOne');
+const { deleteAssociation: deleteOne } = require('../repository')
 
 module.exports = (req, res, next) => {
     const { id } = req.params;
