@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const createOne = require('./middleware/createOne');
+const createInvestment = require('./middleware/createInvestment');
 
 const router = new Router();
 
 router.route('/investment')
-.post(createOne);
+.post(createInvestment);
 
 
 module.exports = router;
