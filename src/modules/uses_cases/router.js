@@ -1,10 +1,10 @@
 const { Router } = require('express');
 
-const createVenteProduit = require('./middleware/createVenteProduit')
+const createOfferProcess = require('./middleware/createOfferProcess')
 
 const router = new Router();
 
 router.route('/vente-produit')
-.post(createVenteProduit);
+.post(createOfferProcess);
 
 module.exports = router;

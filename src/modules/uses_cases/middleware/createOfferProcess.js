@@ -1,4 +1,4 @@
-const createVenteProduit = require('../service/createVenteProduit');
+const createOfferProcess = require('../service/createOfferProcess');
 
 module.exports = (req, res, next) => {
     //vente
@@ -13,14 +13,14 @@ module.exports = (req, res, next) => {
     const { titre } = req.body.produit
     const { description } = req.body.produit
     const { etat } = req.body.produit
-    const { categorie } = req.body.produit
+    const { categorieId } = req.body.produit
     const produitStatut = req.body.produit.statut
 
     const produit = {
         titre,
         description,
         etat,
-        categorie_id: categorie,
+        categorie_id: categorieId,
         statut: produitStatut
     }
     //carac
@@ -30,7 +30,7 @@ module.exports = (req, res, next) => {
     const { images } = req.body.produit
     
 
-    createVenteProduit(vente, produit, images, produitCaracteristiques)
+    createOfferProcess(vente, produit, images, produitCaracteristiques)
         .then((status) => {
             res.status(201).json({
                 status

@@ -2,13 +2,15 @@ const insertProduitAndReturnId = require('../../produit/service/insertProduitAnd
 const createProduitCarac = require('../../produit/service/createProduitCarac')
 const createVente = require('../../vente/service/createOne')
 const createImage = require('../../image/service/createOne')
+const createOffre = require('../../offre/service/createOne')
 
 module.exports = async (vente, produit, images, caracs) => {
 
     try {
         const produitId = await insertProduitAndReturnId(produit);
         vente.produit_id = produitId;
-        await createVente(vente);
+        const venteId = await createVente(vente);
+        await createOffre(produit, venteId)
         for await (element of caracs){
             let caracteristique = {
                 valeur: element.valeur,
