@@ -14,13 +14,9 @@ module.exports = (colis) => {
     })
     .then(function() {
         return new Promise(function(resolve, reject) {
-            var query = "";
-            if(colis.type == "Achat"){
-                query = `INSERT INTO colis (numero, date, prix, type, achat_id) VALUES ("${colissimoNumber}", "${colis.date}", ${colis.prix}, "${colis.type}", ${colis.achat_id})`
-            }
-            else{
-                query = `INSERT INTO colis (numero, date, prix, type, vente_id) VALUES ("${colissimoNumber}", "${colis.date}", ${colis.prix}, "${colis.type}", ${colis.vente_id})`
-            }
+            
+            var query = `INSERT INTO colis (numero, date, prix, type) VALUES ("${colissimoNumber}", "${colis.date}", ${colis.prix}, "${colis.type}")`
+            
             connect.query(query, function(err, result){
                 console.log(result)
                 console.log(err)

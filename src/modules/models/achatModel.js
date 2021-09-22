@@ -5,6 +5,7 @@ const createModel = joi.object({
     date: joi.date().required(),
     utilisateur_id: joi.number().required(),
     achat_produit_id: joi.number().required(),
+    colis_id: joi.number(),
 });
 
 const updateModel = joi.object({
@@ -12,6 +13,7 @@ const updateModel = joi.object({
     date: joi.date(),
     utilisateur_id: joi.number(),
     achat_produit_id: joi.number(),
+    colis_id: joi.number(),
 });
 
 
