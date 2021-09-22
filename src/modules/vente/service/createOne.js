@@ -3,7 +3,6 @@ const connect =  require('../../../client/mysql');
 
 module.exports = (vente) => {
 
-    console.log(vente)
     return createModel.validate(vente)
     .then(function(){
         return new Promise(function(resolve, reject){

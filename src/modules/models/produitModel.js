@@ -6,7 +6,7 @@ const createModel = joi.object({
     etat: joi.string().required(),
     statut: joi.string().required(),
     categorie_id: joi.number().required(),
-    depot_id: joi.number().required(),
+    depot_id: joi.number(),
 });
 
 const updateModel = joi.object({

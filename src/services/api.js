@@ -18,6 +18,7 @@ const projetRouter = require('../modules/projet/router')
 const associationRouter = require('../modules/association/router')
 const evenementRouter = require('../modules/evenement/router')
 const venteRouter = require('../modules/vente/router')
+const useCasesRouter = require('../modules/uses_cases/router')
 
 
 const router = new Router();
@@ -40,5 +41,6 @@ router.use('/api', projetRouter)
 router.use('/api', associationRouter)
 router.use('/api', evenementRouter)
 router.use('/api', venteRouter)
+router.use('/api', useCasesRouter)
 
 module.exports = router;
