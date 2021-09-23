@@ -1,13 +1,17 @@
+  const config = require('config')
+  
   module.exports = (typeProduit) => {
+    console.log("app id " + config.get('one_signal_app_id'))
+    console.log("app id " + config.get('one_signal_api_key'))
     var message = { 
-      app_id: "c1502e68-2f67-4e54-8fcd-a0a44b22b291",
+      app_id: config.get('one_signal_app_id'),
       contents: {"en": `Vous pouvez désormais acheter/vendre des ${typeProduit} sur Green Repack !`},
       included_segments: ["Subscribed Users"]
     };
 
     var headers = {
       "Content-Type": "application/json; charset=utf-8",
-      "Authorization": "Basic MTdhNzk3ZDctNjM0OC00ZDAzLTliNzMtZmMxYWI0ZDExZjFj"
+      "Authorization": `Basic ${config.get('one_signal_api_key')}`
     };
     
     var options = {
