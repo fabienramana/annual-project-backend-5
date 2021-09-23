@@ -76,9 +76,23 @@ function findOneByEmail(email){
     })
 }
 
+function getAllAssociations(){
+    return new Promise(function(resolve,reject){
+        var query = "SELECT * FROM association";
+        db.query(query, function(err,result){
+            if(result.length > 0){
+                resolve(result)
+            }else if (err){
+                reject(err)
+            }
+        })
+    })
+}
+
 module.exports = {
     createAssociation,
     findIfEmailExists,
     findIfRnaExistsBase,
-    deleteAssociation
+    deleteAssociation,
+    getAllAssociations
 }
