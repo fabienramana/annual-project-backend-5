@@ -1,6 +1,6 @@
 const { createModel } = require('../../models/investmentModel')
 const connect =  require('../../../client/mysql');
-const findByUser = require('../../green_coin/service/findByUser')
+const { findGreenCoinsByUser: findByUser} = require('../../green_coin/repository')
 const findOneByEmail = require('../../user/service/findOneByEmail')
 const updateGreenCoin = require('../../green_coin/service/updateOne')
 const createOne = require('./createOne')

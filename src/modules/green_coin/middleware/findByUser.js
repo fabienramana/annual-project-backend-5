@@ -1,4 +1,4 @@
-const findByUser = require('../service/findByUser');
+const { findGreenCoinsByUser: findByUser } = require('../repository');
 
 module.exports = (req, res, next) => {
     const { id } = req.params
