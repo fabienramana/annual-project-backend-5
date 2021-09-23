@@ -7,8 +7,11 @@ module.exports = (email) => {
             console.log(result)
             if(result.length > 0){
                 resolve(result[0])
-            }else{
+            }else if(err){
                 reject(err)
+            }
+            else{
+                reject(new Error("L'email n'existe pas"))
             }
         })
     })

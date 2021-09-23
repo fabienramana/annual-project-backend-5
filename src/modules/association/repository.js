@@ -60,6 +60,22 @@ function deleteAssociation(id){
     })
 }
 
+function findOneByEmail(email){
+    return new Promise(function(resolve,reject){
+        var query = "SELECT * FROM association WHERE email = ?";
+        db.query(query, email, function(err,result){
+            if(result.length > 0){
+                resolve(result)
+            }else if (err){
+                reject(err)
+            }
+            else{
+                reject(new Error("L'email n'existe pas"))
+            }
+        })
+    })
+}
+
 module.exports = {
     createAssociation,
     findIfEmailExists,
