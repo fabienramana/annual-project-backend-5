@@ -1,25 +1,16 @@
 const { categorieModel } = require('../../models/categorieModel')
-const connect =  require('../../../client/mysql');
-const findOneById = require('./findOneById')
+const {findCategorieById: findOneById, updateCategorie} = require('../repository')
 
 module.exports = (libelle, id) => {
-
+    console.log(typeof(id))
     const categorie = {
         libelle
     }
-
+    console.log(categorie)
     return categorieModel.validate({
         libelle
     })
-    .then(function() {
-        return new Promise(function(resolve, reject) {
-            connect.query(`UPDATE categorie SET ? WHERE id = ?`,[categorie, id], function(err, result){
-                if(err) reject(err)
-                console.log(result)
-                if(result.affectedRows == 1)resolve('updated')
-            })
-        })
-    })
+    .then(() => updateCategorie(categorie, id))
     .then(function(){
         return findOneById(id);
     })

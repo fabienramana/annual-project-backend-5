@@ -1,4 +1,4 @@
-const deleteOne = require('../service/deleteOne');
+const { deleteCategorie :deleteOne } = require('../repository');
 
 module.exports = (req, res, next) => {
     const { id } = req.params;
