@@ -1,13 +1,13 @@
 const { createModel } = require('../../models/achatProduitModel')
 const { createAchatProduit: createOne } = require('../repository')
 
-module.exports = (achat_id, produit_id) => {
+module.exports = (achatId, produitId) => {
 
     const achat_produit = {
-        achat_id,
-        produit_id
+        achatId,
+        produitId
     }
 
     return createModel.validate(achat_produit)
-    .then(() => createOne(achat_id, produit_id))
+    .then(() => createOne(achatId, produitId))
 }

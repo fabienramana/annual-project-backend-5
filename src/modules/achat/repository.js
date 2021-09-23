@@ -2,7 +2,7 @@ const db = require('../../client/mysql')
 
 function createAchat(achat){
     return new Promise(function(resolve, reject){
-        var query = `INSERT INTO achat (prix, date, utilisateur_id, achat_produit_id) VALUES (${achat.prix}, "${achat.date}", ${achat.utilisateur_id}, ${achat.achat_produit_id})`
+        var query = `INSERT INTO achat (date, utilisateurId, achatProduitId) VALUES ( "${achat.date}", ${achat.utilisateurId}, ${achat.achatProduitId})`
         db.query(query, function(err, result){
             console.log(result)
             console.log(err)
@@ -55,7 +55,7 @@ function getAll(){
 
 function getAllByUser(id){
     return new Promise(function(resolve,reject){
-        var userQuery = "SELECT * FROM achat WHERE utilisateur_id = ?";
+        var userQuery = "SELECT * FROM achat WHERE utilisateurId = ?";
         db.query(userQuery, id, function(err,result){
             if(result.length > 0){
                 resolve(result)

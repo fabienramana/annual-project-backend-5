@@ -1,28 +1,20 @@
 const { createModel } = require('../../models/colisModel')
-const connect =  require('../../../client/mysql');
-const checkIfNumeroExists = require('./checkIfNumeroExists');
 const createNumero = require('./createNumero');
+const { createColis, findIfNumeroExists } = require('../repository');
 
 module.exports = (colis) => {
+    console.log(colis)
+    const dateToday = new Date()
+    const date_string = dateToday.getFullYear() + "-" + (dateToday.getMonth() +1) + "-" + dateToday.getDate()
     
     var colissimoNumber = ""
     return createModel.validate(colis)
-    .then(() => createNumero())
-    .then((numero) => {
-        colissimoNumber = numero
-        checkIfNumeroExists(numero)
-    })
-    .then(function() {
-        return new Promise(function(resolve, reject) {
-            
-            var query = `INSERT INTO colis (numero, date, prix, type) VALUES ("${colissimoNumber}", "${colis.date}", ${colis.prix}, "${colis.type}")`
-            
-            connect.query(query, function(err, result){
-                console.log(result)
-                console.log(err)
-                if(err) reject(err)
-                if(result.affectedRows == 1)resolve('created')
-            })
-        })
+    .then(() => {
+        var flag = true
+        while(flag == true){
+            colissimoNumber = createNumero()
+            flag = findIfNumeroExists(colissimoNumber)
+        }
+        return createColis(colissimoNumber, date_string, colis.prix, colis.type)
     })
 }

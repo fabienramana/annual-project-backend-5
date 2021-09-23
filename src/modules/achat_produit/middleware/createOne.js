@@ -1,10 +1,10 @@
 const createOne = require('../service/createOne');
 
 module.exports = (req, res, next) => {
-    const { achat_id } = req.body;
-    const { produit_id } = req.body;
+    const { achatId } = req.body;
+    const { produitId } = req.body;
 
-    createOne(achat_id, produit_id)
+    createOne(achatId, produitId)
         .then((status) => {
             res.status(201).json({
                 status

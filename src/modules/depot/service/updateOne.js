@@ -1,19 +1,10 @@
 const { updateModel } = require('../../models/depotModel')
-const connect =  require('../../../client/mysql');
-const findOneById = require('./findOneById')
+const { findDepotById: findOneById, updateDepot } = require('../repository')
 
 module.exports = (depotToUpdate, id) => {
 
     return updateModel.validate(depotToUpdate)
-    .then(function() {
-        return new Promise(function(resolve, reject) {
-            connect.query(`UPDATE depot SET ? WHERE id = ?`,[depotToUpdate, id], function(err, result){
-                if(err) reject(err)
-                console.log(result)
-                if(result.affectedRows == 1)resolve('updated')
-            })
-        })
-    })
+    .then(()=> updateDepot(depotToUpdate, id))
     .then(function(){
         return findOneById(id);
     })

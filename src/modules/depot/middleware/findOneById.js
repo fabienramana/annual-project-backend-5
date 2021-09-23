@@ -1,12 +1,12 @@
-const { findColisById: findOneById } = require('../repository');
+const { findDepotById: findOneById } = require('../repository');
 
 module.exports = (req, res, next) => {
     const { id } = req.params
 
     findOneById(id)
-    .then((colis) => {
+    .then((depot) => {
         res.json({
-            colis
+            depot
         })
     })
     .catch((err)=> {
