@@ -5,9 +5,8 @@ module.exports = (req, res, next) => {
 
     findByStatus(status)
         .then((ventes) => {
-            res.json({
-                ventes
-            })
+            console.log(ventes);
+            res.json(ventes)
         })
         .catch((err) => {
         next(err);
