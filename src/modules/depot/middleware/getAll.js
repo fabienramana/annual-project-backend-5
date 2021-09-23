@@ -1,7 +1,7 @@
-const getAllUsers = require('../service/getAll');
+const {getAllDepots: getAll} = require('../repository');
 
 module.exports = (req, res, next) => {
-    getAllUsers()
+    getAll()
     .then((depots) => {
         res.json(depots);
     })

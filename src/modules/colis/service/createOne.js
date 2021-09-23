@@ -1,5 +1,4 @@
 const { createModel } = require('../../models/colisModel')
-const checkIfNumeroExists = require('./checkIfNumeroExists');
 const createNumero = require('./createNumero');
 const { createColis, findIfNumeroExists } = require('../repository');
 
