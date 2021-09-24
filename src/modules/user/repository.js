@@ -29,7 +29,7 @@ function findIfEmailExists(email){
         })
 }
 
-function findUserByEmail(email){
+async function findUserByEmail(email){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM utilisateur WHERE email = ?";
         db.query(query, email, function(err,result){

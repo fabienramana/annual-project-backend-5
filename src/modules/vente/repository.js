@@ -3,7 +3,7 @@ const db = require('../../client/mysql')
 
 async function createVente(vente, date_string){
     return new Promise(function(resolve, reject){
-        var query = `INSERT INTO vente (statut, date, produitId) VALUES ("${vente.statut}", "${date_string}", ${vente.produitId})`
+        var query = `INSERT INTO vente (statut, date, produitId, utilisateurId) VALUES ("${vente.statut}", "${date_string}", ${vente.produitId}, ${vente.utilisateurId})`
         db.query(query, function(err, result){
             console.log(result)
             console.log(err)
@@ -52,9 +52,23 @@ function updateVente(venteToUpdate, id){
     })
 }
 
+function getAllVentesByUser(id){
+    return new Promise(function(resolve,reject){
+        var userQuery = "SELECT * FROM vente WHERE utilisateurId = ?";
+        db.query(userQuery, id, function(err,result){
+            if(result.length > 0){
+                resolve(result)
+            }else{
+                reject(err)
+            }
+        })
+    })
+}
+
 module.exports = {
     createVente,
     findVentesByStatut,
     findVenteById,
-    updateVente
+    updateVente,
+    getAllVentesByUser
 }

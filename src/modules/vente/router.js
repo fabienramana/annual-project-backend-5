@@ -4,6 +4,7 @@ const findFailed = require('./middleware/findFailed');
 const findOneById = require('./middleware/findOneById');
 const findOnHold = require('./middleware/findOnHold');
 const findSuccess = require('./middleware/findSuccess');
+const getAllByUser = require('./middleware/getAllByUser');
 const updateOne = require('./middleware/updateOne');
 
 const router = new Router();
@@ -23,5 +24,8 @@ router.route('/ventes/annule')
 
 router.route('/ventes/termine')
 .get(findSuccess)
+
+router.route('/ventes/user/:id')
+.get(getAllByUser)
 
 module.exports = router;

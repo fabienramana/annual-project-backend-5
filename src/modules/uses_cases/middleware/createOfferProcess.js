@@ -29,8 +29,8 @@ module.exports = (req, res, next) => {
     //images
     const { images } = req.body.produit
     
-
-    createOfferProcess(vente, produit, images, produitCaracteristiques)
+    var email = "fabien.rmnd@gmail.com"
+    createOfferProcess(vente, produit, images, produitCaracteristiques, email)
         .then((status) => {
             res.status(201).json({
                 status
