@@ -128,6 +128,18 @@ function updateProduit(produitToUpdate, id){
     })
 }
 
+function findSellablesProduits(){
+    return new Promise(function(resolve, reject) {
+        var query = `SELECT * FROM produit WHERE statut = "En vente"`
+        db.query(query, function(err, result){
+            console.log(result)
+            console.log(err)
+            if(err) reject(err)
+            else if(result)resolve(result)
+        })
+    })
+}
+
 module.exports = {
     createProduit,
     createProduitCarac,
@@ -138,5 +150,6 @@ module.exports = {
     getProduitsByIds,
     getAllProducts,
     insertProduitAndReturnId,
-    updateProduit
+    updateProduit,
+    findSellablesProduits
 }
