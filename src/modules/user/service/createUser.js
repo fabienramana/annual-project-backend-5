@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const { createModel } = require('../../models/userModel')
 const {findIfEmailExists: checkIfAssociationEmailExists} = require('../../association/repository')
-const {findIfEmailExists: checkIfEmailExists, createUser: createOne} = require('../repository')
+const {findIfEmailExists: checkIfEmailExists, createUser: createOne, findUserByEmail, findOneById} = require('../repository')
 
 module.exports = (nom, prenom, email, password, adresse, dateNaissance, codePostal, ville) => {
 
@@ -27,4 +27,5 @@ module.exports = (nom, prenom, email, password, adresse, dateNaissance, codePost
     .then(() => checkIfEmailExists(email))
     .then(() => checkIfAssociationEmailExists(email))
     .then(() => createOne(nom, prenom, email, dateNaissance, encryptedPassword, adresse, codePostal, ville))
+    .then((id) => findOneById(id))
 }

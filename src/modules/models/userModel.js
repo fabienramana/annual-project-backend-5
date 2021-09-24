@@ -9,6 +9,7 @@ const createModel = joi.object({
     adresse: joi.string().required(),
     codePostal: joi.number().required(),
     ville: joi.string().required(),
+    role: joi.string(),
 });
 
 const updateModel = joi.object({
@@ -20,6 +21,7 @@ const updateModel = joi.object({
     adresse: joi.string(),
     codePostal: joi.number(),
     ville: joi.string(),
+    role: joi.string(),
 });
 
 module.exports = {

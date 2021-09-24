@@ -6,10 +6,14 @@ module.exports = (req, res, next) => {
     console.log(req.body.email)
     const email = req.body.email
     login(req.body.email)
-    .then((user) => {
-        bcrypt.compare(req.body.password, user.password, (err, res2)=> {
+    .then((returnedUser) => {
+        bcrypt.compare(req.body.password, returnedUser.password, (err, res2)=> {
             if (res2 === true) {
-                jwt.sign({ email }, 'secretKey', { expiresIn: '1440m' }, (errJWT, token) => {
+                var user = {
+                    email: returnedUser.email,
+                    role: returnedUser.role
+                }
+                jwt.sign( user , 'secretKey', { expiresIn: '1440m' }, (errJWT, token) => {
                     res.json({
                         token,
                     });

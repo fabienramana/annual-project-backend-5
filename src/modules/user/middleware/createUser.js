@@ -12,14 +12,14 @@ module.exports = (req, res, next) => {
     const { ville } = req.body;
 
     createUser(nom, prenom, email, password, adresse, dateNaissance, codePostal, ville)
-        .then((user) => {
-        jwt.sign({ user }, 'secretKey', { expiresIn: '1440m' }, (errJWT, token) => {
+        .then((returnedUser) => {
+            var user = {
+                email: returnedUser.email,
+                role: returnedUser.role
+            }
+        jwt.sign(user, 'secretKey', { expiresIn: '1440m' }, (errJWT, token) => {
             res.status(201).json({
-            /*_id: user._id, // eslint-disable-line no-underscore-dangle
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,*/  
-            token,
+                token,
             });
         });
         })

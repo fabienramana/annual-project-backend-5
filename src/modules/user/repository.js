@@ -4,6 +4,8 @@ function findOneById(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM utilisateur WHERE id = ?";
         db.query(query, id, function(err,result){
+            console.log(result)
+            console.log(err)
             if(result.length > 0){
                 resolve(result[0])
             }else{
@@ -50,8 +52,10 @@ function createUser(nom, prenom, email, dateNaissance, encryptedPassword, adress
     return new Promise(function(resolve, reject) {
         var query = `INSERT INTO utilisateur (nom, prenom, email, dateNaissance, password, adresse, codePostal, ville) VALUES ("${nom}","${prenom}","${email}", "${dateNaissance}","${encryptedPassword}","${adresse}","${codePostal}","${ville}")`
         db.query(query, function(err, result){
+            console.log(err)
+            console.log(result.insertId)
             if(err) reject(err)
-            resolve(email)  
+            resolve(result.insertId)  
         })
     })
 }
