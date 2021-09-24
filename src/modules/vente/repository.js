@@ -27,7 +27,7 @@ function findVentesByStatut(statut){
     })
 }
 
-function findVenteById(id){
+async function findVenteById(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM vente WHERE id = ?";
         db.query(query, id, function(err,result){

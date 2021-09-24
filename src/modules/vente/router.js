@@ -6,6 +6,7 @@ const findOnHold = require('./middleware/findOnHold');
 const findSuccess = require('./middleware/findSuccess');
 const getAllByUser = require('./middleware/getAllByUser');
 const updateOne = require('./middleware/updateOne');
+const getVenteInfos = require('./middleware/getVenteInfos');
 
 const router = new Router();
 
@@ -15,6 +16,9 @@ router.route('/vente')
 router.route('/vente/:id')
 .put(updateOne)
 .get(findOneById)
+
+router.route("/vente/infos/:id")
+.get(getVenteInfos)
 
 router.route('/ventes/en-cours')
 .get(findOnHold)

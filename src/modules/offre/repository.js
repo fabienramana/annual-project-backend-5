@@ -35,8 +35,22 @@ function findOffreById(id){
     })
 }
 
+function findOffreByVenteId(id){
+    return new Promise(function(resolve,reject){
+        var query = "SELECT * FROM offre WHERE venteId = ?";
+        db.query(query, id, function(err,result){
+            if(result.length > 0){
+                resolve(result[0])
+            }else{
+                reject(err)
+            }
+        })
+    })
+}
+
 module.exports = {
     createOffre,
     updateOffre,
-    findOffreById
+    findOffreById,
+    findOffreByVenteId
 }

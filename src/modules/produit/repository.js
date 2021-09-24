@@ -51,7 +51,7 @@ function deleteProduitCarac(id){
     })
 }
 
-function findProduitById(id){
+async function findProduitById(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM produit WHERE id = ?";
         db.query(query, id, function(err,result){
@@ -64,7 +64,7 @@ function findProduitById(id){
     })
 }
 
-function findProduitCaracByProduitId(id){
+async function findProduitCaracByProduitId(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM produit_caracteristique WHERE produitId = ?";
         db.query(query, id, function(err,result){
