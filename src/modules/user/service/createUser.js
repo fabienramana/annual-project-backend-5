@@ -1,10 +1,9 @@
 const bcrypt = require('bcrypt')
 const { createModel } = require('../../models/userModel')
-const connect =  require('../../../client/mysql');
-const checkIfEmailExists = require('./checkIfEmailExists')
 const {findIfEmailExists: checkIfAssociationEmailExists} = require('../../association/repository')
+const {findIfEmailExists: checkIfEmailExists, createUser: createOne} = require('../repository')
 
-module.exports = (nom, prenom, email, password, adresse, date_naissance, code_postal, ville) => {
+module.exports = (nom, prenom, email, password, adresse, dateNaissance, codePostal, ville) => {
 
     if (password == null) {
         const err = new Error("Aucun password n'est défini");
@@ -18,21 +17,14 @@ module.exports = (nom, prenom, email, password, adresse, date_naissance, code_po
           nom,
           prenom,
           email,
-          date_naissance,
+          dateNaissance ,
           password: encryptedPassword,
           adresse,
-          code_postal,
+          codePostal,
           ville
       }
     return createModel.validate(user)
     .then(() => checkIfEmailExists(email))
     .then(() => checkIfAssociationEmailExists(email))
-    .then(function() {
-        return new Promise(function(resolve, reject) {
-            connect.query(`INSERT INTO utilisateur (nom, prenom, email, date_naissance, password, adresse, code_postal, ville) VALUES ("${nom}","${prenom}","${email}", "${date_naissance}","${encryptedPassword}","${adresse}","${code_postal}","${ville}")`, function(err, result){
-                if(err) reject(err)
-                resolve(email)  
-            })
-        })
-    })
+    .then(() => createOne(nom, prenom, email, dateNaissance, encryptedPassword, adresse, codePostal, ville))
 }

@@ -1,4 +1,4 @@
-const getUserInfos = require('../service/getUserInfos');
+const {findOneById: getUserInfos} = require('../repository');
 
 module.exports = (req, res, next) => {
     const { id } = req.params

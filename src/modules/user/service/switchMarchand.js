@@ -1,5 +1,4 @@
-const db = require('../../../client/mysql')
-const findOneById = require('./findOneById')
+const { findOneById, updateUser } = require('../repository')
 
 module.exports = (id) => {
     return findOneById(id)
@@ -18,14 +17,7 @@ module.exports = (id) => {
         }
         return userToUpdate;
     })
-    .then((userToUpdate) => {
-        return new Promise(function(resolve, reject){
-            db.query(`UPDATE utilisateur SET ? WHERE id = ?`, [userToUpdate, id], function(err, result){
-                if(err) reject(err)
-                if(result.affectedRows >0) resolve('ok')
-            })
-        })
-    })
+    .then((userToUpdate) => updateUser(userToUpdate, id))
     .then(function(){
         return findOneById(id)
     })

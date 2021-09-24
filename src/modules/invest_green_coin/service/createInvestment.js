@@ -1,6 +1,6 @@
 const { createModel } = require('../../models/investmentModel')
 const { findGreenCoinsByUser: findByUser} = require('../../green_coin/repository')
-const findOneByEmail = require('../../user/service/findOneByEmail')
+const {findUserByEmail:findOneByEmail} = require('../../user/repository')
 const updateGreenCoin = require('../../green_coin/service/updateOne')
 const { createInvestment :createOne } = require('../repository')
 

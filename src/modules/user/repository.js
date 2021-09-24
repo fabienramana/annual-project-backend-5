@@ -29,7 +29,63 @@ function findIfEmailExists(email){
         })
 }
 
+function findUserByEmail(email){
+    return new Promise(function(resolve,reject){
+        var query = "SELECT * FROM utilisateur WHERE email = ?";
+        db.query(query, email, function(err,result){
+            console.log(result)
+            if(result.length > 0){
+                resolve(result[0])
+            }else if(err){
+                reject(err)
+            }
+            else{
+                reject(new Error("L'email n'existe pas"))
+            }
+        })
+    })
+}
+
+function createUser(nom, prenom, email, dateNaissance, encryptedPassword, adresse, codePostal, ville){
+    return new Promise(function(resolve, reject) {
+        var query = `INSERT INTO utilisateur (nom, prenom, email, dateNaissance, password, adresse, codePostal, ville) VALUES ("${nom}","${prenom}","${email}", "${dateNaissance}","${encryptedPassword}","${adresse}","${codePostal}","${ville}")`
+        db.query(query, function(err, result){
+            if(err) reject(err)
+            resolve(email)  
+        })
+    })
+}
+
+function getAllUsers(){
+    return new Promise(function(resolve,reject){
+        var query = "SELECT * FROM utilisateur";
+        db.query(query, function(err,result){
+            if(result.length > 0){
+                resolve(result)
+            }else{
+                reject(err)
+            }
+        })
+    })
+}
+
+function updateUser(userToUpdate, id){
+    return new Promise(function(resolve, reject){
+        var query = `UPDATE utilisateur SET ? WHERE id = ?`
+        db.query(query, [userToUpdate, id], function(err, result){
+            console.log(err)
+            console.log(result)
+            if(err) reject(err)
+            if(result.affectedRows >0) resolve('ok')
+        })
+    })
+}
+
 module.exports = {
     findOneById,
-    findIfEmailExists
+    findIfEmailExists,
+    findUserByEmail,
+    createUser,
+    getAllUsers,
+    updateUser
 }
