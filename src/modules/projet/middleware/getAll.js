@@ -1,4 +1,4 @@
-const getAll = require('../service/getAll');
+const { getAllProjets :getAll } = require('../repository');
 
 module.exports = (req, res, next) => {
     getAll()

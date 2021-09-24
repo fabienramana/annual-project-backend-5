@@ -1,4 +1,4 @@
-const findOneById = require('../service/findOneById');
+const { findProjetById: findOneById } = require('../repository');
 
 module.exports = (req, res, next) => {
     const { id } = req.params

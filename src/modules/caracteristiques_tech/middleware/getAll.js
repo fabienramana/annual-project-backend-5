@@ -1,5 +1,5 @@
 const { getAllCaracTechnique } = require('../repository');
-const getAllUnites = require('../../unite/service/getAll');
+const {getAllUnites} = require('../../unite/repository');
 
 module.exports = async (req, res, next) => {
     try {
