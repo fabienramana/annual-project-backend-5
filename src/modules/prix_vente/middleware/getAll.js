@@ -1,4 +1,4 @@
-const getAllPrix = require('../service/getAll');
+const { getAllPrixVente :getAllPrix } = require('../repository');
 
 module.exports = (req, res, next) => {
     getAllPrix()

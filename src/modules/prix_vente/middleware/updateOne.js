@@ -1,12 +1,14 @@
-const { deletePrixVente :deleteOne } = require('../repository');
+const updateOne = require('../service/updateOne');
 
 module.exports = (req, res, next) => {
+    const prixVenteToUpdate  = req.body
     const { id } = req.params;
 
-    deleteOne(id)
-        .then((status) => {
+
+    updateOne(prixVenteToUpdate, id)
+        .then((offre) => {
             res.json({
-                status
+                offre
             })
         })
         .catch((err) => {

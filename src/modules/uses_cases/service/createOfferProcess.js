@@ -22,7 +22,7 @@ module.exports = async (vente, produit, images, caracs) => {
         for await (element of images) {
             let image = {
                 url: element,
-                produit_id: produitId
+                produitId: produitId
             }
             await createImage(image);
         }
