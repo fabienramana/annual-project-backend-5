@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
         titre,
         description,
         etat,
-        categorie_id: categorieId,
+        categorieId: categorieId,
         statut: produitStatut
     }
     //carac

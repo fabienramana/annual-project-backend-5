@@ -2,14 +2,14 @@ const joi = require('@hapi/joi');
 
 const createModel = joi.object({
     valeur: joi.string().required(),
-    caracteristiques_tech_id: joi.number().required(),
-    produit_id: joi.number().required()
+    caracteristiquesTechId: joi.number().required(),
+    produitId: joi.number().required()
 });
 
 const updateModel = joi.object({
     valeur: joi.string(),
-    caracteristiques_tech_id: joi.number(),
-    produit_id: joi.number()
+    caracteristiquesTechId: joi.number(),
+    produitId: joi.number()
 });
 
 

@@ -1,19 +1,12 @@
-const connect =  require('../../../client/mysql');
-const deleteProduitCarac = require('./deleteProduitCarac');
-const findProduitCaracByProduit = require('./findProduitCaracByProduit')
+//const deleteProduitCarac = require('./deleteProduitCarac');
+//const findProduitCaracByProduit = require('./findProduitCaracByProduit')
+const { deleteProduit, deleteProduitCarac, findProduitCaracByProduitId } = require('../repository')
 
 module.exports = (id) => {
 
-    return new Promise(function(resolve, reject) {
-        connect.query(`DELETE FROM produit WHERE id = ${id}`, function(err, result){
-            console.log(err)
-            console.log(result)
-            if(err) reject(err)
-            if(result.affectedRows == 1)resolve('deleted')
-        })
-    })
+    return deleteProduit(id)
     .then(() => {
-        findProduitCaracByProduit(id)
+        findProduitCaracByProduitId(id)
         .then((produitCarac) => {
             const produitCarac_id = produitCarac.id
             deleteProduitCarac(produitCarac_id)

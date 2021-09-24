@@ -6,8 +6,8 @@ const createModel = joi.object({
     prix: joi.number(),
     etat: joi.string().required(),
     statut: joi.string().required(),
-    categorie_id: joi.number().required(),
-    depot_id: joi.number(),
+    categorieId: joi.number().required(),
+    depotId: joi.number(),
 });
 
 const updateModel = joi.object({
@@ -16,8 +16,8 @@ const updateModel = joi.object({
     prix: joi.number(),
     etat: joi.string(),
     statut: joi.string(),
-    categorie_id: joi.number(),
-    depot_id: joi.number(),
+    categorieId: joi.number(),
+    depotId: joi.number(),
 });
 
 

@@ -1,8 +1,6 @@
 const checkout = require('../service/checkout');
-const produits = require('../../produit/service/findProduitsByIds');
-const findProduitsByIds = require('../../produit/service/findProduitsByIds');
+const { getProduitsByIds:findProduitsByIds} = require('../../produit/repository');
 const bcrypt = require('bcrypt')
-const createAchat = require('../../achat/service/createOne');
 
 module.exports = async (req, res, next) => {
 

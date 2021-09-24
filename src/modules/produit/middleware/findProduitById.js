@@ -1,4 +1,4 @@
-const findProduitById = require('../service/findProduitById');
+const { findProduitById } = require('../repository');
 
 module.exports = (req, res, next) => {
     const { id } = req.params
