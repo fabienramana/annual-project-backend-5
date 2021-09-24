@@ -1,5 +1,4 @@
 const { createModel } = require('../../models/associationModel')
-const connect =  require('../../../client/mysql');
 const bcrypt = require('bcrypt');
 const checkIfRnaExistsAPI = require('./checkIfRnaExistsAPI');
 const { findIfRnaExistsBase, findIfEmailExists, createAssociation } = require('../repository');
