@@ -1,4 +1,4 @@
-const findByStatus = require('../service/findByStatus');
+const {findVentesByStatut:findByStatus} = require('../repository');
 
 module.exports = (req, res, next) => {
     const status = "Terminé"
