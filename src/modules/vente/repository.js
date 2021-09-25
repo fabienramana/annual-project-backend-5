@@ -40,7 +40,7 @@ async function findVenteById(id){
     })
 }
 
-function updateVente(venteToUpdate, id){
+async function updateVente(venteToUpdate, id){
     return new Promise(function(resolve, reject) {
         var query = `UPDATE vente SET ? WHERE id = ?`
         db.query(query,[venteToUpdate, id], function(err, result){
