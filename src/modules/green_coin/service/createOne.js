@@ -1,7 +1,7 @@
 const { createModel } = require('../../models/greenCoinModel')
 const { createGreenCoin } = require('../repository');
 
-module.exports = (green_coin) => {
+module.exports = async(green_coin) => {
 
     const dateLastDay = new Date(new Date().getFullYear(), 11, 31)
     const date_string = dateLastDay.getFullYear() + "-" + (dateLastDay.getMonth() +1) + "-" + dateLastDay.getDate()

@@ -1,6 +1,6 @@
 const db = require('../../client/mysql')
 
-function createGreenCoin(greenCoinToInsert){
+async function createGreenCoin(greenCoinToInsert){
     return new Promise(function(resolve, reject){
         var query = `INSERT INTO green_coin (montant, dateExpiration, montantRestant, utilisateurId) VALUES ("${greenCoinToInsert.montant}", "${greenCoinToInsert.dateExpiration}", "${greenCoinToInsert.montantRestant}", ${greenCoinToInsert.utilisateurId})`
         db.query(query, function(err, result){
