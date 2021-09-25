@@ -66,10 +66,38 @@ function getAllByUser(id){
     })
 }
 
+async function findAchatByTransactionId(id){
+    return new Promise(function(resolve,reject){
+        var query = "SELECT * FROM achat WHERE transactionId = ?";
+        db.query(query, id, function(err,result){
+            console.log(result)
+            console.log(err)
+            if(result.length > 0){
+                resolve(result[0])
+            }else{
+                reject(err)
+            }
+        })
+    })
+}
+
+async function updateAchat(achatToUpdate, id){
+    return new Promise(function(resolve, reject) {
+        db.query(`UPDATE achat SET ? WHERE id = ?`,[achatToUpdate, id], function(err, result){
+            console.log(result)
+            console.log(err)
+            if(err) reject(err)
+            if(result.affectedRows == 1)resolve('updated')
+        })
+    })
+}
+
 module.exports = {
     createAchat,
     deleteAchat,
     findOneById,
     getAll,
-    getAllByUser
+    getAllByUser,
+    findAchatByTransactionId,
+    updateAchat
 }
