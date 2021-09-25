@@ -10,7 +10,7 @@ async function createOffre(date_string, price, venteId){
     })
 }
 
-function updateOffre(offreToUpdate, id){
+async function updateOffre(offreToUpdate, id){
     return new Promise(function(resolve, reject) {
         var query = `UPDATE offre SET ? WHERE id = ?`
         db.query(query,[offreToUpdate, id], function(err, result){
@@ -22,7 +22,7 @@ function updateOffre(offreToUpdate, id){
     })
 }
 
-function findOffreById(id){
+async function findOffreById(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM offre WHERE id = ?";
         db.query(query, id, function(err,result){

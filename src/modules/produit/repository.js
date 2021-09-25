@@ -117,9 +117,10 @@ async function insertProduitAndReturnId(product){
     })
 }
 
-function updateProduit(produitToUpdate, id){
+async function updateProduit(produitToUpdate, id){
     return new Promise(function(resolve, reject) {
-        db.query(`UPDATE produit SET ? WHERE id = ?`,[produitToUpdate, id], function(err, result){
+        var query = `UPDATE produit SET ? WHERE id = ?`
+        db.query(query,[produitToUpdate, id], function(err, result){
             console.log(result)
             console.log(err)
             if(err) reject(err)
