@@ -22,10 +22,20 @@ const useCasesRouter = require('../modules/uses_cases/router')
 const prixVenteRouter = require('../modules/prix_vente/router')
 const offreRouter = require('../modules/offre/router')
 
+const userNoRequirementRouter = require('../modules/user/routerNoRequirements')
+const productNoRequirementRouter = require('../modules/produit/routerNoRequirement')
+
+const assignToken = require('./assignToken')
+const verifyToken = require('./verifyToken')
+
 
 const router = new Router();
 
 router.use('/api', basicsRouter);
+router.use('/api', userNoRequirementRouter);
+router.use('/api', productNoRequirementRouter);
+router.use(assignToken)
+router.use(verifyToken)
 router.use('/api', userRouter);
 router.use('/api', categorieRouter);
 router.use('/api', depotRouter)
