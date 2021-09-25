@@ -1,6 +1,6 @@
 const createOne = require('../service/createOne');
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     const { achatId } = req.body;
     const { produitId } = req.body;
 

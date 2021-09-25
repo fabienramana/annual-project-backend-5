@@ -1,22 +1,29 @@
 const checkout = require('../service/checkout');
 const { getProduitsByIds:findProduitsByIds} = require('../../produit/repository');
 const bcrypt = require('bcrypt')
+const createAchat = require('../../achat/service/createOne')
+const createAchatProduit = require('../../achat_produit/service/createOne')
 
 module.exports = async (req, res, next) => {
 
-    const ids = req.body;
+    const{ ids } = req.body;
     console.log(ids);
     const itemsToGet = await findProduitsByIds(ids);  // get items by ids [0,2,3,.....]
     console.log(itemsToGet);
-    date = '2021/09/21'
+    const dateToday = new Date()
+    const date_string = dateToday.getFullYear() + "-" + (dateToday.getMonth() +1) + "-" + dateToday.getDate()
     const achat = {
-        date: '2021/09/21',
-        utilisateur_id: 1,
-        achat_produit_id: 1,
-        transaction_id:  bcrypt.hashSync(Date.now().toString(), 10)
+        date: date_string,
+        utilisateurId: 1,
+        transactionId:  bcrypt.hashSync(Date.now().toString(), 10)
     }
-
     console.log(achat);
+    const achatId = await createAchat(achat)
+    console.log("achatId " + achatId)
+    console.log(typeof(achatId))
+    for(const product of itemsToGet){
+        await createAchatProduit(achatId, product.id)
+    }
     const items = [];
     itemsToGet.forEach(obj => {
         let item = 
@@ -30,13 +37,12 @@ module.exports = async (req, res, next) => {
             },
             quantity: 1
         }
-
         items.push(item);
     });
 
     console.log(JSON.stringify(items));
     try {
-        const url = await checkout(items, achat.transaction_id);
+        const url = await checkout(items, achat.transactionId);
         res.status(201).json( url ) 
     } catch(err){
         next(err);

@@ -2,12 +2,12 @@ const db = require('../../client/mysql')
 
 function createAchat(achat){
     return new Promise(function(resolve, reject){
-        var query = `INSERT INTO achat (date, utilisateurId, achatProduitId) VALUES ( "${achat.date}", ${achat.utilisateurId}, ${achat.achatProduitId})`
+        var query = `INSERT INTO achat (date, utilisateurId, transactionId) VALUES ( "${achat.date}", ${achat.utilisateurId}, "${achat.transactionId}")`
         db.query(query, function(err, result){
             console.log(result)
             console.log(err)
             if(err) reject(err)
-            if(result.affectedRows == 1)resolve('created')
+            if(result.affectedRows == 1)resolve(result.insertId)
         })
         
     })

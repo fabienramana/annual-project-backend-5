@@ -1,14 +1,14 @@
 const { createModel } = require('../../models/achatModel')
 const { createAchat: createOne } = require('../repository')
 
-module.exports = (achat) => {
+module.exports = async (achat) => {
     const dateToday = new Date()
     const date_string = dateToday.getFullYear() + "-" + (dateToday.getMonth() +1) + "-" + dateToday.getDate()
 
     const achatToInsert = {
         date: date_string,
         utilisateurId: achat.utilisateurId,
-        achatProduitId: achat.achatProduitId
+        transactionId: achat.transactionId
     }
 
     return createModel.validate(achatToInsert)

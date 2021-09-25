@@ -1,7 +1,7 @@
 const { createModel } = require('../../models/achatProduitModel')
 const { createAchatProduit: createOne } = require('../repository')
 
-module.exports = (achatId, produitId) => {
+module.exports = async (achatId, produitId) => {
 
     const achat_produit = {
         achatId,

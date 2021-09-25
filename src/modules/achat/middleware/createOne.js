@@ -1,6 +1,6 @@
 const createOne = require('../service/createOne');
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     const achat  = req.body;
 
     createOne(achat)
