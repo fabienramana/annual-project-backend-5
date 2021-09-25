@@ -14,7 +14,7 @@ module.exports = async (id) => {
         produit.images = images
         produit.produitCaracteristiques = caracs
         vente.produit = produit
-        vente.offre = offre
+        vente.offres = offre
 
         console.log("vente: " + JSON.stringify(vente))
         return vente
