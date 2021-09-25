@@ -2,6 +2,7 @@ const {findVenteById, updateVente} = require('../../vente/repository')
 const {findOffreById, updateOffre} = require('../../offre/repository')
 const {findProduitById, updateProduit} = require('../../produit/repository')
 const {findPrixVenteByTitre} = require('../../prix_vente/repository')
+const createColis = require('../../colis/service/createOne')
 
 module.exports = async (id, statut) =>{
     const offre = await findOffreById(id)
@@ -10,14 +11,16 @@ module.exports = async (id, statut) =>{
     const prix_vente = await findPrixVenteByTitre(produit.titre)
 
     if (statut == "Accepté"){
-        await updateOffre({ statut: "Accepté"}, id)
         await updateProduit({statut: "En vente", prix: prix_vente.prix + prix_vente.prix*0.3}, produit.id)
+        const colisId = await createColis({ prix: prix_vente.prix*0.05, type: "Vente"})
+        await updateOffre({ statut: "Accepté", colisId}, id)
+        await updateVente({statut: "Terminé"}, vente.id)
     }
     else if (statut == "Refusé"){
         await updateOffre({ statut: "Refusé"}, id)
         await updateProduit({statut: "Non valide"}, produit.id)
+        await updateVente({statut: "Terminé"}, vente.id)
     }
 
-    await updateVente({statut: "Terminé"}, vente.id)
     return "done"
 }

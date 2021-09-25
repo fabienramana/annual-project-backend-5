@@ -13,7 +13,7 @@ function getAllColis(){
     })
 }
 
-function createColis(number, date, prix, type){
+async function createColis(number, date, prix, type){
     return new Promise(function(resolve, reject) {
             
         var query = `INSERT INTO colis (numero, date, prix, type) VALUES ("${number}", "${date}", ${prix}, "${type}")`
@@ -22,7 +22,7 @@ function createColis(number, date, prix, type){
             console.log(result)
             console.log(err)
             if(err) reject(err)
-            if(result.affectedRows == 1)resolve('created')
+            if(result.affectedRows == 1)resolve(result.insertId)
         })
     })
 }
