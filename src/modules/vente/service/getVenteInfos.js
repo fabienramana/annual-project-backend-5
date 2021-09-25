@@ -4,17 +4,23 @@ const { findOffreByVenteId } = require('../../offre/repository')
 const { findImagesByProduitId } = require('../../image/repository')
 
 module.exports = async (id) => {
-    var vente = await findVenteById(id);
-    var offre = await findOffreByVenteId(id)
-    var produit = await findProduitById(vente.produitId)
-    var caracs = await findProduitCaracByProduitId(produit.id)
-    var images = await findImagesByProduitId(produit.id)
+    try {
+        const vente = await findVenteById(id);
+        const offre = await findOffreByVenteId(id)
+        const produit = await findProduitById(vente.produitId)
+        const caracs = await findProduitCaracByProduitId(produit.id)
+        const images = await findImagesByProduitId(produit.id)
 
-    produit.images = images
-    produit.produitCaracteristiques = caracs
-    vente.produit = produit
-    vente.offre = offre
+        produit.images = images
+        produit.produitCaracteristiques = caracs
+        vente.produit = produit
+        vente.offre = offre
 
-    console.log(vente)
-    return vente
+        console.log("vente: " + JSON.stringify(vente))
+        return vente
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+    
 }   
