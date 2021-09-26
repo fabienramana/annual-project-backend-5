@@ -112,6 +112,16 @@ function getUsersByRole(role){
     })
 }
 
+function deleteUser(id){
+    return new Promise(function(resolve, reject) {
+        var query = `DELETE FROM utilisateur WHERE id = ${id}`
+        db.query(query, function(err, result){
+            if(err) reject(err)
+            if(result.affectedRows == 1)resolve('deleted')
+        })
+    })
+}
+
 module.exports = {
     findOneById,
     findIfEmailExists,
@@ -120,5 +130,6 @@ module.exports = {
     getAllUsers,
     updateUser,
     createUserWithRole,
-    getUsersByRole
+    getUsersByRole,
+    deleteUser
 }
