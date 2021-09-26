@@ -14,9 +14,7 @@ module.exports = (req, res, next) => {
     .then((user) => updateOne(user.id, userToUpdate))
     .then((user) => {
         delete user.password;
-        res.json({
-            user 
-        })
+        res.json(user)
     })
     .catch((err)=> {
         next(err)

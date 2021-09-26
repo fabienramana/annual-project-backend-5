@@ -9,9 +9,7 @@ module.exports = (req, res, next) => {
 
     updateProduit(productToUpdate, id)
     .then((produit) => {
-        res.json({
-            produit
-        })
+        res.json(produit)
     })
     .catch((err)=> {
         next(err)

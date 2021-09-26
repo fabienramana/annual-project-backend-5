@@ -5,9 +5,7 @@ module.exports = (req, res, next) => {
 
     findOneById(id)
     .then((projet) => {
-        res.json({
-            projet
-        })
+        res.json(projet)
     })
     .catch((err)=> {
         next(err)

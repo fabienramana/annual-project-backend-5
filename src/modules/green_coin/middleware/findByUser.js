@@ -7,9 +7,7 @@ module.exports = (req, res, next) => {
     findUserByEmail(email)
     .then((user) => findByUser(user.id))
     .then((green_coins) => {
-        res.json({
-            green_coins
-        })
+        res.json(green_coins)
     })
     .catch((err)=> {
         next(err)

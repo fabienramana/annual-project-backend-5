@@ -10,9 +10,7 @@ module.exports = (req, res, next) => {
 
     updateOne(offreToUpdate, id)
         .then((offre) => {
-            res.json({
-                offre
-            })
+            res.json(offre)
         })
         .catch((err) => {
         next(err);

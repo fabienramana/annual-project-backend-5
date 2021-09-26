@@ -6,9 +6,7 @@ module.exports = (req, res, next) => {
 
     updateOne(greenCoinToUpdate, id)
         .then((green_coin) => {
-            res.json({
-                green_coin
-            })
+            res.json(green_coin)
         })
         .catch((err) => {
         next(err);

@@ -6,9 +6,7 @@ module.exports = (req, res, next) => {
     console.log("update middleware")
     updateOne(libelle, id)
         .then((categorie) => {
-            res.json({
-                categorie
-            })
+            res.json(categorie)
         })
         .catch((err) => {
         next(err);

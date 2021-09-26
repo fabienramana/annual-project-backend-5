@@ -6,9 +6,7 @@ module.exports = (req, res, next) => {
     findUserByEmail(email)
     .then((user) => {
         delete user.password;
-        res.json({
-            user 
-        })
+        res.json(user)
     })
     .catch((err)=> {
         next(err)

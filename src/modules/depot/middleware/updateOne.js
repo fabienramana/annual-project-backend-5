@@ -6,9 +6,7 @@ module.exports = (req, res, next) => {
 
     updateOne(depotToUpdate, id)
         .then((depot) => {
-            res.json({
-                depot
-            })
+            res.json(depot)
         })
         .catch((err) => {
         next(err);

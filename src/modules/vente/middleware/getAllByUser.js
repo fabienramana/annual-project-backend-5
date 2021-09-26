@@ -6,8 +6,8 @@ module.exports = (req, res, next) => {
     
     findUserByEmail(email)
     .then((user) => getAllByUser(user.id))
-    .then((achats) => {
-        res.json(achats);
+    .then((ventes) => {
+        res.json(ventes);
     })
     .catch((err) =>{
         next(err);

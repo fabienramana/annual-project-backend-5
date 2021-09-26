@@ -6,9 +6,7 @@ module.exports = (req, res, next) => {
 
     updateOne(imageToUpdate, id)
         .then((image) => {
-            res.json({
-                image
-            })
+            res.json(image)
         })
         .catch((err) => {
         next(err);

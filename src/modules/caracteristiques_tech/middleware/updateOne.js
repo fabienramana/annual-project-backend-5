@@ -6,9 +6,7 @@ module.exports = (req, res, next) => {
 
     updateOne(caracTechs, id)
         .then((caracteristique_tech) => {
-            res.json({
-                caracteristique_tech
-            })
+            res.json(caracteristique_tech)
         })
         .catch((err) => {
         next(err);

@@ -6,10 +6,8 @@ module.exports = (req, res, next) => {
 
 
     updateOne(prixVenteToUpdate, id)
-        .then((offre) => {
-            res.json({
-                offre
-            })
+        .then((prix_vente) => {
+            res.json(prix_vente)
         })
         .catch((err) => {
         next(err);
