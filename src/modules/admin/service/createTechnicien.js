@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 
 module.exports = async (user) => {
 
-    const encryptedPassword = bcrypt.hashSync(user.password, 10);
+    const encryptedPassword = bcrypt.hashSync('GR@2021', 10);
     user.password = encryptedPassword
     user.role = "Technicien"
 

@@ -25,6 +25,8 @@ const updateModel = joi.object({
 });
 
 const createTechnicienModel = joi.object({
+    nom: joi.string().required(),
+    prenom: joi.string().required(),
     email: joi.string().required(), 
     password: joi.string().required(),
     role: joi.string(),

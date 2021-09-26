@@ -50,7 +50,7 @@ async function findUserByEmail(email){
 
 function createUserWithRole(user){
     return new Promise(function(resolve,reject){
-        var query = `INSERT INTO utilisateur (email, password, role) VALUES ("${user.email}","${user.password}","${user.role}")`;
+        var query = `INSERT INTO utilisateur (nom, prenom, email, password, role) VALUES ("${user.nom}","${user.prenom}","${user.email}","${user.password}","${user.role}")`;
         db.query(query, function(err,result){
             console.log(err)
             console.log(result.insertId)
