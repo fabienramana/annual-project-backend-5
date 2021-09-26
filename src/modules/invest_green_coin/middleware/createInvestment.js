@@ -1,4 +1,5 @@
 const createInvestment = require('../service/createInvestment');
+const decodeToken = require('../../../services/decodeToken')
 
 module.exports = (req, res, next) => {
     const investment = req.body;
