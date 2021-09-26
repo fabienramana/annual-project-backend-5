@@ -1,5 +1,5 @@
 const { createTechnicienModel } = require('../../models/userModel')
-const { createUserWithRole } = require('../../user/repository')
+const { createUserWithRole, findIfEmailExists } = require('../../user/repository')
 const bcrypt = require('bcrypt')
 
 module.exports = async (user) => {
@@ -9,5 +9,6 @@ module.exports = async (user) => {
     user.role = "Technicien"
 
     return createTechnicienModel.validate(user)
+    .then(() => findIfEmailExists(user.email))
     .then(() => createUserWithRole(user))
 }
