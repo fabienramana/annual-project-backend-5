@@ -1,9 +1,9 @@
-const {findOneById: getUserInfos} = require('../repository');
+const { findUserByEmail} = require('../repository');
 
 module.exports = (req, res, next) => {
-    const { id } = req.params
+    const { email } = req.params
 
-    getUserInfos(id)
+    findUserByEmail(email)
     .then((user) => {
         delete user.password;
         res.json({

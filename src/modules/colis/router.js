@@ -1,18 +1,13 @@
 const { Router } = require('express');
+const checkIfUserIsTechnicien = require('../../services/checkIfUserIsTechnicien');
 const createOne = require('./middleware/createOne');
 const deleteOne = require('./middleware/deleteOne');
 const findOneById = require('./middleware/findOneById');
-const getAll = require('./middleware/getAll');
 
 const router = new Router();
 
-router.route('/colis')
-.post(createOne)
-.get(getAll)
+router.post('/colis', checkIfUserIsTechnicien, createOne)
 
-router.route('/colis/:id')
-.delete(deleteOne)
-.get(findOneById)
-
+router.get('/colis/:id', findOneById)
 
 module.exports = router;

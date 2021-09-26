@@ -3,19 +3,19 @@ const createOne = require('./middleware/createOne');
 const updateOne = require('./middleware/updateOne');
 const deleteOne = require('./middleware/deleteOne');
 const getAll = require('./middleware/getAll')
-const findOneById = require('./middleware/findOneById')
+const findOneById = require('./middleware/findOneById');
+const checkIfUserIsTechnicien = require('../../services/checkIfUserIsTechnicien');
 
 const router = new Router();
 
-router.route('/depots')
-.get(getAll);
+router.get('/depots', checkIfUserIsTechnicien, getAll)
 
-router.route('/depot/:id')
-.put(updateOne)
-.get(findOneById)
-.delete(deleteOne);
+router.put('/depot/:id', checkIfUserIsTechnicien, updateOne)
 
-router.route('/depot')
-.post(createOne);
+router.get('/depot/:id', checkIfUserIsTechnicien, findOneById)
+
+router.delete('/depot/:id', checkIfUserIsTechnicien, deleteOne)
+
+router.post('/depot', checkIfUserIsTechnicien, createOne)
 
 module.exports = router;

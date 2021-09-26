@@ -2,16 +2,15 @@ const { Router } = require('express');
 const createOne = require('./middleware/createOne');
 const updateOne = require('./middleware/updateOne');
 const findByUser = require('./middleware/findByUser');
+const checkIfUserIsTechnicien = require('../../services/checkIfUserIsTechnicien');
 
 const router = new Router();
 
-router.route('/green_coin')
-.post(createOne);
+router.post('/green_coin', checkIfUserIsTechnicien, createOne)
 
-router.route('/green_coin/:id')
-.put(updateOne);
+router.put('/green_coin/:id', checkIfUserIsTechnicien, updateOne)
 
-router.route('/green_coin/user/:id')
+router.route('/green_coin/user/:email')
 .get(findByUser)
 
 module.exports = router;

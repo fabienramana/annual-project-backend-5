@@ -2,7 +2,8 @@ const createInvestment = require('../service/createInvestment');
 
 module.exports = (req, res, next) => {
     const investment = req.body;
-    var email = "fabien.rmnd@gmail.com" // A remplacer avec le token
+    const user = decodeToken(req)
+    var email = user.email // A remplacer avec le token
     
     createInvestment(investment, email)
         .then((status) => {

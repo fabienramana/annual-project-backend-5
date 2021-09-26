@@ -29,7 +29,8 @@ module.exports = (req, res, next) => {
     //images
     const { images } = req.body.produit
     
-    var email = "fabien.rmnd@gmail.com"
+    const user = decodeToken(req)
+    var email = user.email
     createOfferProcess(vente, produit, images, produitCaracteristiques, email)
         .then((status) => {
             res.status(201).json({

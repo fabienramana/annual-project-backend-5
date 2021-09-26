@@ -7,29 +7,25 @@ const findSuccess = require('./middleware/findSuccess');
 const getAllByUser = require('./middleware/getAllByUser');
 const updateOne = require('./middleware/updateOne');
 const getVenteInfos = require('./middleware/getVenteInfos');
+const checkIfUserIsTechnicien = require('../../services/checkIfUserIsTechnicien');
+const checkIfUserIsMarchand = require('../../services/checkIfUserIsMarchand');
 
 const router = new Router();
 
-router.route('/vente')
-.post(createOne);
+router.post('/vente', checkIfUserIsMarchand, createOne)
 
-router.route('/vente/:id')
-.put(updateOne)
-.get(findOneById)
+router.put('/vente/:id', checkIfUserIsTechnicien, updateOne)
 
-router.route("/vente/infos/:id")
-.get(getVenteInfos)
+router.get('/vente/:id', checkIfUserIsMarchand, findOneById)
 
-router.route('/ventes/en-cours')
-.get(findOnHold)
+router.get("/vente/infos/:id", checkIfUserIsMarchand, getVenteInfos)
 
-router.route('/ventes/annule')
-.get(findFailed)
+router.get('/ventes/en-cours', checkIfUserIsTechnicien, findOnHold)
 
-router.route('/ventes/termine')
-.get(findSuccess)
+router.get('/ventes/annule', checkIfUserIsTechnicien, findFailed)
 
-router.route('/ventes/user/:id')
-.get(getAllByUser)
+router.get('/ventes/termine', checkIfUserIsTechnicien, findSuccess)
+
+router.get('/ventes/user/:email', checkIfUserIsMarchand, getAllByUser)
 
 module.exports = router;

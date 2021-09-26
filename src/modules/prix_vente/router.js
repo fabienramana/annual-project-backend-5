@@ -1,20 +1,18 @@
 const { Router } = require('express');
+const checkIfUserIsTechnicien = require('../../services/checkIfUserIsTechnicien');
+const checkIfUserIsMarchand = require('../../services/checkIfUserIsMarchand');
 
 const createOne = require('./middleware/createOne')
-const deleteOne = require('./middleware/deleteOne')
+//const deleteOne = require('./middleware/deleteOne')
 const getAll = require('./middleware/getAll');
 const updateOne = require('./middleware/updateOne');
 
 const router = new Router();
 
-router.route('/prix_vente/:id')
-.delete(deleteOne)
-.put(updateOne)
+router.put('/prix_vente/:id', checkIfUserIsTechnicien, updateOne)
 
-router.route('/prix_vente')
-.post(createOne);
+router.post('/prix_vente', checkIfUserIsTechnicien, createOne)
 
-router.route('/prix_vente')
-.get(getAll);
+router.get('/prix_vente', checkIfUserIsMarchand, getAll)
 
 module.exports = router;

@@ -1,14 +1,14 @@
 const { Router } = require('express');
+const checkIfUserIsAdministrateur = require('../../services/checkIfUserIsAdmin');
 const getAllUsers = require('./middleware/getAllUsers');
 const getUserInfos = require('./middleware/getUserInfos')
 const updateOne = require('./middleware/updateOne')
 
 const router = new Router();
 
-router.route('/users')
-.get(getAllUsers);
+router.get('/users', checkIfUserIsAdministrateur, getAllUsers)
 
-router.route('/user/:id')
+router.route('/user/:email')
 .get(getUserInfos)
 .put(updateOne);
 

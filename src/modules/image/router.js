@@ -1,17 +1,15 @@
 const { Router } = require('express');
+const checkIfUserIsTechnicien = require('../../services/checkIfUserIsTechnicien');
 const createOne = require('./middleware/createOne');
 const findByProduit = require('./middleware/findByProduit');
 const updateOne = require('./middleware/updateOne');
 
 const router = new Router();
 
-router.route('/image')
-.post(createOne);
+router.post('/image', checkIfUserIsTechnicien, createOne)
 
-router.route('/image/:id')
-.put(updateOne)
+router.put('/image/:id', checkIfUserIsTechnicien, updateOne)
 
-router.route('/image/produit/:id')
-.get(findByProduit)
+router.get('/image/produit/:id', checkIfUserIsTechnicien, findByProduit)
 
 module.exports = router;

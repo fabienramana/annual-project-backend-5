@@ -23,7 +23,23 @@ function deleteEvenement(id){
     })
 }
 
+async function findIfAchatIsDuringEvent(){
+    return new Promise(function(resolve, reject) {
+        const dateToday = new Date()
+        const date_string = dateToday.getFullYear() + "-" + (dateToday.getMonth() +1) + "-" + dateToday.getDate()
+        var query = `SELECT * FROM evenement WHERE dateDebut <= ? AND dateFin >= ?`
+        db.query(query,[date_string, date_string] ,function(err, result){
+            if(err) reject(err)
+            if(result.length > 0)resolve(true)
+            else{
+                resolve(false)
+            }
+        })
+    })
+}
+
 module.exports = {
     createEvenement,
-    deleteEvenement
+    deleteEvenement,
+    findIfAchatIsDuringEvent
 }
