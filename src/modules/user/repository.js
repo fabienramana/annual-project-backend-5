@@ -48,6 +48,18 @@ async function findUserByEmail(email){
     })
 }
 
+function createUserWithRole(user){
+    return new Promise(function(resolve,reject){
+        var query = `INSERT INTO utilisateur (email, password, role) VALUES ("${user.email}","${user.password}","${user.role}")`;
+        db.query(query, function(err,result){
+            console.log(err)
+            console.log(result.insertId)
+            if(err) reject(err)
+            resolve(result.insertId)  
+        })
+    })
+}
+
 function createUser(nom, prenom, email, dateNaissance, encryptedPassword, adresse, codePostal, ville){
     return new Promise(function(resolve, reject) {
         var query = `INSERT INTO utilisateur (nom, prenom, email, dateNaissance, password, adresse, codePostal, ville) VALUES ("${nom}","${prenom}","${email}", "${dateNaissance}","${encryptedPassword}","${adresse}","${codePostal}","${ville}")`
@@ -85,11 +97,28 @@ function updateUser(userToUpdate, id){
     })
 }
 
+function getUsersByRole(role){
+    return new Promise(function(resolve,reject){
+        var query = `SELECT * FROM utilisateur WHERE role = "${role}"`;
+        db.query(query, function(err,result){
+            console.log(result)
+            console.log(err)
+            if(result.length > 0){
+                resolve(result)
+            }else{
+                reject(err)
+            }
+        })
+    })
+}
+
 module.exports = {
     findOneById,
     findIfEmailExists,
     findUserByEmail,
     createUser,
     getAllUsers,
-    updateUser
+    updateUser,
+    createUserWithRole,
+    getUsersByRole
 }

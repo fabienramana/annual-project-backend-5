@@ -24,7 +24,14 @@ const updateModel = joi.object({
     role: joi.string(),
 });
 
+const createTechnicienModel = joi.object({
+    email: joi.string().required(), 
+    password: joi.string().required(),
+    role: joi.string(),
+});
+
 module.exports = {
     createModel,
-    updateModel
+    updateModel,
+    createTechnicienModel
 }
