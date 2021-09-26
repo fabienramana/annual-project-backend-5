@@ -16,11 +16,8 @@ async function findImagesByProduitId(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM image WHERE produitId = ?";
         db.query(query, id, function(err,result){
-            if(result.length > 0){
-                resolve(result)
-            }else{
-                reject(err)
-            }
+            if(err) reject(err);
+            resolve(result)
         })
     })
 }
