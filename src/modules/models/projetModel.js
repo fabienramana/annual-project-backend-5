@@ -5,6 +5,7 @@ const createModel = joi.object({
     description: joi.string().required(),
     dateDebut: joi.date().required(),
     dateFin: joi.date().required(),
+    associationId: joi.number().required()
 });
 
 const updateModel = joi.object({
