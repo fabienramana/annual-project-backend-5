@@ -8,7 +8,7 @@ const router = new Router();
 
 router.post('/create-technicien', checkIfUserIsAdmin, createTechnicien)
 
-router.get('/users/role', checkIfUserIsAdmin, getAllTechniciens)
+router.get('/users/:role', checkIfUserIsAdmin, getAllTechniciens)
 
 router.delete('/user/:id', checkIfUserIsAdmin, deleteTechnicien)
 
