@@ -9,16 +9,16 @@ const conn = mysql.createConnection({
     database: "annualproject5"
 });*/
 
-const conn = mysql.createConnection({
+const conn = mysql.createPool({
   host: dbConfig.HOST,
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
   database: dbConfig.DB
 });
-
+/*
 conn.connect(error => {
     if (error) throw error;
     console.log("Successfully connected to the database.");
   });
-
+*/
 module.exports = conn;
