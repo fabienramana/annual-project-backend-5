@@ -1,12 +1,19 @@
 const mysql = require('mysql')
-const { Sequelize } = require('sequelize')
+const dbConfig = require('../../config/db.config')
 
-
+/*
 const conn = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "",
-    database: "green repack"
+    user: "fabien",
+    password: "fabien",
+    database: "annualproject5"
+});*/
+
+const conn = mysql.createConnection({
+  host: dbConfig.HOST,
+  user: dbConfig.USER,
+  password: dbConfig.PASSWORD,
+  database: dbConfig.DB
 });
 
 conn.connect(error => {
