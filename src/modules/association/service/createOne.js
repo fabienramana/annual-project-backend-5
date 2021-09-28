@@ -4,7 +4,7 @@ const checkIfRnaExistsAPI = require('./checkIfRnaExistsAPI');
 const { findIfRnaExistsBase, findIfEmailExists, createAssociation } = require('../repository');
 const { findIfEmailExists: findIfUserEmailExists } = require('../../user/repository')
 
-module.exports = (nom, rna, email, password) => {
+module.exports = (nom, rna, email, password, logo) => {
 
     if (password == null) {
         const err = new Error("Aucun password n'est défini");
@@ -17,6 +17,7 @@ module.exports = (nom, rna, email, password) => {
     const association = {
         nom,
         rna,
+        logo,
         email,
         password: encryptedPassword
     }
@@ -26,5 +27,5 @@ module.exports = (nom, rna, email, password) => {
     .then(() => findIfUserEmailExists(email))
     .then(() => checkIfRnaExistsAPI(rna))
     .then(() => findIfRnaExistsBase(rna))
-    .then(() => createAssociation(nom, rna, email, encryptedPassword))
+    .then(() => createAssociation(nom, rna, logo, email, encryptedPassword))
 }

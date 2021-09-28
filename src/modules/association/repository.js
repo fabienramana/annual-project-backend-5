@@ -1,8 +1,8 @@
 const db = require('../../client/mysql');
 
-function createAssociation(nom, rna, email, password){
+function createAssociation(nom, rna, email, password, logo){
     return new Promise(function(resolve, reject){
-        var query = `INSERT INTO association (nom, rna, email, password) VALUES ("${nom}", "${rna}", "${email}", "${password}")`
+        var query = `INSERT INTO association (nom, rna, logo, email, password) VALUES ("${nom}", "${rna}", "${logo}", "${email}", "${password}")`
         db.query(query, function(err, result){
             console.log(result)
             console.log(err)

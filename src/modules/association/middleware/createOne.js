@@ -5,8 +5,9 @@ module.exports = (req, res, next) => {
     const { rna } = req.body;
     const { email } = req.body;
     const { password } = req.body;
+    const { logo } = req.body;
 
-    createOne(nom, rna, email, password)
+    createOne(nom, rna, email, password, logo)
         .then((status) => {
             res.status(201).json({
                 status

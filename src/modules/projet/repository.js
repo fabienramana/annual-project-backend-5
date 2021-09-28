@@ -2,7 +2,7 @@ const db = require('../../client/mysql')
 
 function createProject(projet){
     return new Promise(function(resolve, reject){
-        var query = `INSERT INTO projet (libelle, description, dateDebut, dateFin, associationId) VALUES ("${projet.libelle}", "${projet.description}", "${projet.dateDebut}", "${projet.dateFin}", ${projet.associationId})`
+        var query = `INSERT INTO projet (libelle, description, somme, dateDebut, dateFin, associationId) VALUES ("${projet.libelle}", "${projet.description}", ${projet.somme}, "${projet.dateDebut}", "${projet.dateFin}", ${projet.associationId})`
         db.query(query, function(err, result){
             console.log(result)
             console.log(err)

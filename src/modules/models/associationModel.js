@@ -3,6 +3,7 @@ const joi = require('@hapi/joi');
 const createModel = joi.object({
     nom: joi.string().required(),
     rna: joi.string().required(),
+    logo: joi.string().required(),
     email: joi.string().required(),
     password: joi.string().required(),
 });
@@ -10,6 +11,7 @@ const createModel = joi.object({
 const updateModel = joi.object({
     nom: joi.string(),
     rna: joi.string(),
+    logo: joi.string(),
     email: joi.string(),
     password: joi.string(),
 });
