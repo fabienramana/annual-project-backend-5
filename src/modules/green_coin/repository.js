@@ -8,6 +8,9 @@ async function createGreenCoin(greenCoinToInsert){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('created')
+            else{
+                reject(new Error('Insert failed'))
+            }
         })
         
     })
@@ -21,6 +24,9 @@ function findGreenCoinsByUser(id){
             console.log(err)
             if(result.length > 0){
                 resolve(result)
+            }
+            else if(result.length == 0){
+                resolve([])
             }else{
                 reject(err)
             }
@@ -34,6 +40,9 @@ function findGreenCoinById(id){
         db.query(query, id, function(err,result){
             if(result.length > 0){
                 resolve(result[0])
+            }
+            else if(result.length == 0){
+                reject(new Error('No record found'))
             }else{
                 reject(err)
             }
@@ -49,6 +58,9 @@ function updateGreenCoin(greenCoinToUpdate, id){
             if(err) reject(err)
             console.log(result)
             if(result.affectedRows == 1)resolve('updated')
+            else{
+                reject(new Error('Update failed'))
+            }
         })
     })
 }

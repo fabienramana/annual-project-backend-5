@@ -9,6 +9,7 @@ function createProduit(product){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve(result.insertId)
+            else reject(new Error('Insert failed'))
         }) 
     })
 }
@@ -23,6 +24,7 @@ function createProduitCarac(carac_tech){
                 reject(err)
             }
             else if(result.affectedRows == 1)resolve('created')
+            else reject(new Error('Insert failed'))
         })
         
     })
@@ -57,7 +59,10 @@ async function findProduitById(id){
         db.query(query, id, function(err,result){
             if(result.length > 0){
                 resolve(result[0])
-            }else{
+            }else if(result.length ==0){
+                reject(new Error('No record found'))
+            }
+            else{
                 reject(err)
             }
         })
@@ -70,7 +75,10 @@ async function findProduitCaracByProduitId(id){
         db.query(query, id, function(err,result){
             if(result.length > 0){
                 resolve(result[0])
-            }else{
+            }else if(result.length ==0){
+                reject(new Error('No record found'))
+            }
+            else{
                 reject(err)
             }
         })
@@ -85,6 +93,8 @@ function getProduitsByIds(ids){
             console.log(err)
             if(result.length > 0){
                 resolve(result)
+            }else if(result.length ==0){
+                reject(new Error('No record found'))
             }else{
                 reject(err)
             }
@@ -98,6 +108,8 @@ function getAllProducts(){
         db.query(query, function(err,result){
             if(result.length > 0){
                 resolve(result)
+            }else if(result.length ==0){
+                resolve([])
             }else{
                 reject(err)
             }
@@ -113,6 +125,7 @@ async function insertProduitAndReturnId(product){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve(result.insertId)
+            else reject(new Error('Update failed'))
         }) 
     })
 }
@@ -125,6 +138,7 @@ async function updateProduit(produitToUpdate, id){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('updated')
+            else reject(new Error('Update failed'))
         })
     })
 }

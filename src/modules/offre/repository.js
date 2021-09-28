@@ -7,6 +7,7 @@ async function createOffre(date_string, price, venteId){
         console.log(err)
         if(err) throw err
         if(result.affectedRows == 1) return "created"
+        else reject(new Error('Insert failed'))
     })
 }
 
@@ -18,6 +19,7 @@ async function updateOffre(offreToUpdate, id){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('updated')
+            else reject(new Error('Update failed'))
         })
     })
 }
@@ -28,7 +30,11 @@ async function findOffreById(id){
         db.query(query, id, function(err,result){
             if(result.length > 0){
                 resolve(result[0])
-            }else{
+            }
+            else if(result.length == 0){
+                reject(new Error('No record found'))
+            }
+            else{
                 reject(err)
             }
         })

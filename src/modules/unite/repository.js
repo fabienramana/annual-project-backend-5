@@ -7,6 +7,7 @@ function createUnite(libelle, abreviation, type){
             if(err) reject(err)
             console.log(result)
             if(result.affectedRows == 1)resolve('created')
+            else reject(new Error('Insert failed'))
         })        
     })
 }
@@ -27,7 +28,10 @@ function findUniteById(id){
         db.query(query, id, function(err,result){
             if(result.length > 0){
                 resolve(result[0])
-            }else{
+            }else if(result.length ==0){
+                reject(new Error('No record found'))
+            }
+            else{
                 reject(err)
             }
         })
@@ -40,7 +44,11 @@ function getAllUnites(){
         db.query(userQuery, function(err,result){
             if(result.length > 0){
                 resolve(result)
-            }else{
+            }
+            else if(result.length ==0){
+                resolve([])
+            }
+            else{
                 reject(err)
             }
         })
@@ -54,6 +62,7 @@ function updateUnite(uniteToUpdate, id){
             if(err) reject(err)
             console.log(result)
             if(result.affectedRows == 1)resolve('updated')
+            else reject(new Error('Update failed'))
         })
     })
 }

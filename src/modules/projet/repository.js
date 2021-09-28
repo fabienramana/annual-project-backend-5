@@ -8,6 +8,7 @@ function createProject(projet){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve("created")
+            else reject(new Error('Insert failed'))
         }) 
     })
 }
@@ -20,7 +21,10 @@ function findProjetById(id){
             console.log(err)
             if(result.length > 0){
                 resolve(result[0])
-            }else{
+            }else if(result.length ==0){
+                reject(new Error('No record found'))
+            }
+            else{
                 reject(err)
             }
         })
@@ -33,6 +37,8 @@ function getAllProjets(){
         db.query(query, function(err,result){
             if(result.length > 0){
                 resolve(result)
+            }else if(result.length ==0){
+                resolve([])
             }else{
                 reject(err)
             }

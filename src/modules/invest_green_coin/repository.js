@@ -9,6 +9,9 @@ function createInvestment(amount, projet_id, green_coin_id){
             if(err) reject(err)
             console.log(result)
             if(result.affectedRows == 1)resolve('created')
+            else{
+                reject(new Error('Insert failed'))
+            }
         })
     })
 }

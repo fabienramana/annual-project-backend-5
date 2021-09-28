@@ -8,6 +8,9 @@ function createAssociation(nom, rna, email, password, logo){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('created')
+            else{
+                reject(new Error('Insert failed'))
+            }
         })
         
     })
@@ -82,6 +85,10 @@ function getAllAssociations(){
         db.query(query, function(err,result){
             if(result.length > 0){
                 resolve(result)
+                
+            }
+            else if(result.length == 0){
+                resolve([])
             }else if (err){
                 reject(err)
             }
@@ -94,5 +101,6 @@ module.exports = {
     findIfEmailExists,
     findIfRnaExistsBase,
     deleteAssociation,
-    getAllAssociations
+    getAllAssociations,
+    findOneByEmail
 }

@@ -21,7 +21,11 @@ function getAllCategories(){
         db.query(query, function(err,result){
             if(result.length > 0){
                 resolve(result)
-            }else{
+            }
+            else if(result.length == 0){
+                resolve([])
+            }
+            else{
                 reject(err)
             }
         })
@@ -63,6 +67,9 @@ function updateCategorie(categorie, id){
             console.log(result)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('updated')
+            else{
+                reject(new Error('Update failed'))
+            }
         })
     })
 }
@@ -73,7 +80,11 @@ function findCategorieById(id){
         db.query(query, id, function(err,result){
             if(result.length > 0){
                 resolve(result[0])
-            }else{
+            }
+            else if(result.length == 0){
+                reject(new Error('No record found'))
+            }
+            else{
                 reject(err)
             }
         })

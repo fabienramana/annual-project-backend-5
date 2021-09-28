@@ -8,7 +8,10 @@ function findOneById(id){
             console.log(err)
             if(result.length > 0){
                 resolve(result[0])
-            }else{
+            }else if(result.length ==0){
+                reject(new Error('No record found'))
+            }
+            else{
                 reject(err)
             }
         })
@@ -55,7 +58,7 @@ function createUserWithRole(user){
             console.log(err)
             console.log(result.insertId)
             if(err) reject(err)
-            resolve(result.insertId)  
+            resolve(result.insertId) 
         })
     })
 }
@@ -78,6 +81,8 @@ function getAllUsers(){
         db.query(query, function(err,result){
             if(result.length > 0){
                 resolve(result)
+            }else if(result.length ==0){
+                resolve([])
             }else{
                 reject(err)
             }
@@ -93,6 +98,7 @@ function updateUser(userToUpdate, id){
             console.log(result)
             if(err) reject(err)
             if(result.affectedRows >0) resolve('ok')
+            else reject(new Error('Update failed'))
         })
     })
 }
@@ -105,7 +111,10 @@ function getUsersByRole(role){
             console.log(err)
             if(result.length > 0){
                 resolve(result)
-            }else{
+            }else if(result.length ==0){
+                resolve([])
+            }
+            else{
                 reject(err)
             }
         })

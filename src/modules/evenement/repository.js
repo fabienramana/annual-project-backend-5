@@ -8,6 +8,9 @@ function createEvenement(evenement){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('created')
+            else{
+                reject(new Error('Insert failed'))
+            }
         })
         
     })

@@ -9,6 +9,7 @@ async function createVente(vente, date_string){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve(result.insertId)
+            else reject(new Error('Insert failed'))
         })
         
     })
@@ -20,6 +21,9 @@ function findVentesByStatut(statut){
         db.query(query, statut, function(err,result){
             if(result.length > 0){
                 resolve(result)
+            }
+            else if(result.length ==0){
+                resolve([])
             }else{
                 reject(err)
             }
@@ -33,6 +37,9 @@ async function findVenteById(id){
         db.query(query, id, function(err,result){
             if(result.length > 0){
                 resolve(result[0])
+            }
+            else if(result.length ==0){
+                reject(new Error('No record found'))
             }else{
                 reject(err)
             }
@@ -48,6 +55,7 @@ async function updateVente(venteToUpdate, id){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('updated')
+            else reject(new Error('Update failed'))
         })
     })
 }
@@ -58,6 +66,9 @@ function getAllVentesByUser(id){
         db.query(userQuery, id, function(err,result){
             if(result.length > 0){
                 resolve(result)
+            }
+            else if(result.length ==0){
+                resolve([])
             }else{
                 reject(err)
             }

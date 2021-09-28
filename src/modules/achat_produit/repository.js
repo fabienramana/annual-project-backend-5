@@ -8,6 +8,9 @@ function createAchatProduit(achatId, produitId){
             console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('created')
+            else{
+                reject(new Error('Insert failed'))
+            }
         })
     })
 }
@@ -18,7 +21,10 @@ async function findByAchatId(achatId){
         db.query(query, achatId, function(err,result){
             if(result.length > 0){
                 resolve(result)
-            }else{
+            }else if(result.length == 0){
+                resolve([])
+            }
+            else{
                 reject(err)
             }
         })
@@ -31,7 +37,10 @@ function findByProduitId(produitId){
         db.query(query, produitId, function(err,result){
             if(result.length > 0){
                 resolve(result)
-            }else{
+            }else if(result.length == 0){
+                resolve([])
+            }
+            else{
                 reject(err)
             }
         })
