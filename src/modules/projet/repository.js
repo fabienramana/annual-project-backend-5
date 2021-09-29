@@ -31,7 +31,7 @@ function findProjetById(id){
     })
 }
 
-function getAllProjets(){
+async function getAllProjets(){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM projet";
         db.query(query, function(err,result){

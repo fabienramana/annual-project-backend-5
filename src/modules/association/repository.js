@@ -79,13 +79,12 @@ function findOneByEmail(email){
     })
 }
 
-function getAllAssociations(){
+async function getAllAssociations(){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM association";
         db.query(query, function(err,result){
             if(result.length > 0){
                 resolve(result)
-                
             }
             else if(result.length == 0){
                 resolve([])
