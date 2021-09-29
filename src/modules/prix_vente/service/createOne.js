@@ -5,4 +5,7 @@ module.exports = (prix_vente) => {
 
     return createModel.validate(prix_vente)
     .then(() => createOne(prix_vente))
+    .catch((err) =>{
+        throw err;
+    })
 }
