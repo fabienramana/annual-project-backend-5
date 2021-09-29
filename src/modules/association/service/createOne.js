@@ -27,5 +27,5 @@ module.exports = (nom, rna, email, password, logo) => {
     .then(() => findIfUserEmailExists(email))
     .then(() => checkIfRnaExistsAPI(rna))
     .then(() => findIfRnaExistsBase(rna))
-    .then(() => createAssociation(nom, rna, logo, email, encryptedPassword))
+    .then(() => createAssociation(nom, rna, email, encryptedPassword, logo))
 }

@@ -68,7 +68,7 @@ function findOneByEmail(email){
         var query = "SELECT * FROM association WHERE email = ?";
         db.query(query, email, function(err,result){
             if(result.length > 0){
-                resolve(result)
+                resolve(result[0])
             }else if (err){
                 reject(err)
             }
