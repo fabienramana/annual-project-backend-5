@@ -1,6 +1,6 @@
-const { getProjetsByAssociationId } = require('../repository');
+const { getProjetsByAssociationId } = require('../../projet/repository');
 const decodeToken = require('../../../services/decodeToken')
-const { getOneByEmail } = require('../../association/repository')
+const { getOneByEmail } = require('../repository')
 
 module.exports = async (req, res, next) => {
 
@@ -12,7 +12,8 @@ module.exports = async (req, res, next) => {
         projets.forEach(projet => {
             projet.logo = association.logo
         });
-        res.json(projets)
+        association.projets = projets
+        res.json(association)
     } catch (err) {
         next(err)
     }
