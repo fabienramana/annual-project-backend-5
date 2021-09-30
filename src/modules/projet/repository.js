@@ -46,8 +46,24 @@ async function getAllProjets(){
     })
 }
 
+async function getProjetsByAssociationId(id){
+    return new Promise(function(resolve,reject){
+        var query = `SELECT * FROM projet WHERE associationId = ${id}`;
+        db.query(query, function(err,result){
+            if(result.length > 0){
+                resolve(result)
+            }else if(result.length ==0){
+                resolve([])
+            }else{
+                reject(err)
+            }
+        })
+    })
+}
+
 module.exports = {
     createProject,
     findProjetById,
-    getAllProjets
+    getAllProjets,
+    getProjetsByAssociationId
 }
