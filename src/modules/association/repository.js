@@ -95,11 +95,23 @@ async function getAllAssociations(){
     })
 }
 
+async function getOneByEmail(email) {
+    return new Promise(function(resolve, reject)  {
+        var query = "SELECT * FROM association WHERE email = ?"
+        db.query(query, email, function(error, results){
+            if(error) reject(error)
+            if(results.length == 0) reject("Email introuvable")
+            resolve(results[0])
+        })
+    })
+}
+
 module.exports = {
     createAssociation,
     findIfEmailExists,
     findIfRnaExistsBase,
     deleteAssociation,
     getAllAssociations,
-    findOneByEmail
+    findOneByEmail,
+    getOneByEmail
 }
