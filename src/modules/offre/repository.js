@@ -51,9 +51,20 @@ function findOffreByVenteId(id){
     })
 }
 
+function findOffresByUser(id){
+    return new Promise(function(resolve,reject){
+        var query = `SELECT o.*, p.titre FROM offre o LEFT JOIN vente v ON v.id = o.venteId LEFT JOIN produit p ON p.id = v.produitId LEFT JOIN utilisateur u ON v.utilisateurId = u.id WHERE u.id = ${id}`;
+        db.query(query, function(err,result){
+            if(err) reject(err);
+            resolve(result)
+        })
+    })
+}
+
 module.exports = {
     createOffre,
     updateOffre,
     findOffreById,
-    findOffreByVenteId
+    findOffreByVenteId,
+    findOffresByUser
 }
