@@ -9,6 +9,9 @@ module.exports = async (req, res, next) => {
         const association = await getOneByEmail(user.email);
         const id = association.id
         const projets = await getProjetsByAssociationId(id)
+        projets.forEach(projet => {
+            projet.logo = association.logo
+        });
         res.json(projets)
     } catch (err) {
         next(err)
