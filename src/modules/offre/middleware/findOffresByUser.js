@@ -1,9 +1,9 @@
 const { findOffresByUser } = require('../repository')
 
 module.exports = async (req, res, next) => {
-    const { id } = req.params;
-    console.log(id)
-    findOffresByUser(id)
+    const { email } = req.params;
+    console.log(email)
+    findOffresByUser(email)
         .then((offres) => {
             res.json(offres)
         })

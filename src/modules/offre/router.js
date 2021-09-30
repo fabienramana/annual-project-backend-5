@@ -11,6 +11,6 @@ router.put('/offre/:id', checkIfUserIsTechnicien, updateOne)
 
 router.post('/contre-offre/:id', checkIfUserIsTechnicien, createContreOffre)
 
-router.get('/offres/user/:id', checkIfUserIsMarchand, findOffresByUser)
+router.get('/offres/user/:email', checkIfUserIsMarchand, findOffresByUser)
 
 module.exports = router;
