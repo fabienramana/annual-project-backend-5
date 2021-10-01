@@ -1,11 +1,9 @@
-const { getAllByUser } = require('../repository');
-const { findUserByEmail } = require('../../user/repository')
+const  getAllByUser = require('../service/getAllByUser');
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     const { email } = req.params;
     
-    findUserByEmail(email)
-    .then((user) => getAllByUser(user.id))
+    getAllByUser(email)
     .then((achats) => {
         res.json(achats);
     })

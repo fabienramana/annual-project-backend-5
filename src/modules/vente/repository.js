@@ -60,10 +60,12 @@ async function updateVente(venteToUpdate, id){
     })
 }
 
-function getAllVentesByUser(id){
+function getAllVentesByUserAndFinished(id){
     return new Promise(function(resolve,reject){
-        var userQuery = "SELECT * FROM vente WHERE utilisateurId = ?";
+        var userQuery = "SELECT v.*, p.titre FROM vente v LEFT JOIN produit p ON p.id = v.produitId WHERE v.statut='Terminé' AND utilisateurId = ?";
         db.query(userQuery, id, function(err,result){
+            console.log(result)
+            console.log(err)
             if(result.length > 0){
                 resolve(result)
             }
@@ -81,5 +83,5 @@ module.exports = {
     findVentesByStatut,
     findVenteById,
     updateVente,
-    getAllVentesByUser
+    getAllVentesByUserAndFinished
 }
