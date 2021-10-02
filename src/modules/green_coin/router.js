@@ -10,7 +10,7 @@ router.post('/green_coin', checkIfUserIsTechnicien, createOne)
 
 router.put('/green_coin/:id', checkIfUserIsTechnicien, updateOne)
 
-router.route('/green_coin/user/:email')
+router.route('/green_coin/user')
 .get(findByUser)
 
 module.exports = router;
