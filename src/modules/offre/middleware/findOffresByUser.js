@@ -1,4 +1,4 @@
-const { findOffresByUser } = require('../repository')
+const { findOffresByUserAndWaiting: findOffresByUser } = require('../repository')
 
 module.exports = async (req, res, next) => {
     const { email } = req.params;

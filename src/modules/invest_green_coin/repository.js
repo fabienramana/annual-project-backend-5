@@ -16,6 +16,25 @@ function createInvestment(amount, projet_id, green_coin_id){
     })
 }
 
+async function getInvestmentByProject(id){
+    return new Promise(function(resolve,reject){
+        var query = "SELECT * FROM invest_green_coin WHERE projetId = ?";
+        db.query(query, id, function(err,result){
+            console.log(result)
+            console.log(err)
+            if(result.length > 0){
+                resolve(result)
+            }
+            else if(result.length == 0){
+                resolve([])
+            }else{
+                reject(err)
+            }
+        })
+    })
+}
+
 module.exports = {
-    createInvestment
+    createInvestment,
+    getInvestmentByProject
 }

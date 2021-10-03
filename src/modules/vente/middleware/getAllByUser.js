@@ -1,11 +1,11 @@
-const { getAllVentesByUserAndFinished: getAllByUserAndFinished } = require('../repository');
+const { getAllVentesByUser } = require('../repository');
 const { findUserByEmail } = require('../../user/repository')
 
 module.exports = (req, res, next) => {
     const { email } = req.params;
     
     findUserByEmail(email)
-    .then((user) => getAllByUserAndFinished(user.id))
+    .then((user) => getAllVentesByUser(user.id))
     .then((ventes) => {
         res.json(ventes);
     })

@@ -4,7 +4,6 @@ const updateModel = joi.object({
     date: joi.date(),
     prix: joi.number(),
     venteId: joi.number(),
-    colisId: joi.number(),
 });
 
 

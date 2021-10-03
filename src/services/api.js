@@ -22,6 +22,7 @@ const useCasesRouter = require('../modules/uses_cases/router')
 const prixVenteRouter = require('../modules/prix_vente/router')
 const offreRouter = require('../modules/offre/router')
 const adminRouter = require('../modules/admin/router')
+const retourRouter = require('../modules/retour_produit/router')
 
 const userNoRequirementRouter = require('../modules/user/routerNoRequirements')
 const productNoRequirementRouter = require('../modules/produit/routerNoRequirement')
@@ -60,6 +61,7 @@ router.use('/api', venteRouter)
 router.use('/api', useCasesRouter)
 router.use('/api', prixVenteRouter)
 router.use('/api', offreRouter)
+router.use('/api', retourRouter)
 
 
 module.exports = router;
