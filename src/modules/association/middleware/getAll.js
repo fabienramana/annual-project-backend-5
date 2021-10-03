@@ -8,6 +8,9 @@ module.exports = async (req, res, next) => {
         associations.forEach(association => {
             delete association.password
             let projet = projets.filter(p => p.associationId == association.id);
+            projet.forEach(p => {
+                p.logo = association.logo
+            });
             association.projets = projet;
         });
         res.json(associations)

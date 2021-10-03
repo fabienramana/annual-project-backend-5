@@ -6,6 +6,7 @@ module.exports = async (req, res, next) => {
 
     try {
         const user = decodeToken(req)
+        console.log(user)
         const association = await getOneByEmail(user.email);
         const id = association.id
         const projets = await getProjetsByAssociationId(id)

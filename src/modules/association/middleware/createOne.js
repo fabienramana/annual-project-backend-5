@@ -9,9 +9,9 @@ module.exports = (req, res, next) => {
     const { logo } = req.body;
 
     createOne(nom, rna, email, password, logo)
-    .then((returnedAssociation) => {
+    .then(() => {
         var association = {
-            email: returnedAssociation.email,
+            email,
             role: "Association"
         }
     jwt.sign(association, 'secretKey', { expiresIn: '1440m' }, (errJWT, token) => {
