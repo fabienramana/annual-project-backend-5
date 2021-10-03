@@ -16,7 +16,7 @@ module.exports = (investment, email) => {
             for(let i=0;i<gc.length;i++){
                 montant += gc[i].montantRestant
                 green_coins.push(gc[i])
-                if(investment.amount <= montant){
+                if(investment.montant <= montant){
                     break;
                 }
             }
@@ -28,41 +28,41 @@ module.exports = (investment, email) => {
         return new Promise(function(resolve, reject){
             console.log("gc length"+green_coins.length)
             for(let i=0; i<green_coins.length;i++){
-                if(green_coins[i].montantRestant == investment.amount){
+                if(green_coins[i].montantRestant == investment.montant){
                     console.log("equal")
                     createOne(green_coins[i].montantRestant, investment.projetId, green_coins[i].id)
                     .then((message) => console.log(message))
-                    investment.amount -= green_coins[i].montantRestant 
+                    investment.montant -= green_coins[i].montantRestant 
                     updateGreenCoin({
                         montantRestant: 0
                     },
                     green_coins[i].id)
                     .then(() => console.log('update done'))
                 }
-                else if(green_coins[i].montantRestant > investment.amount){
-                    console.log('green_coins[i].montant_restant > investment.amount')
-                    createOne(investment.amount, investment.projetId, green_coins[i].id)
+                else if(green_coins[i].montantRestant > investment.montant){
+                    console.log('green_coins[i].montant_restant > investment.montant')
+                    createOne(investment.montant, investment.projetId, green_coins[i].id)
                     .then((message) => console.log(message))
                     updateGreenCoin({
-                        montantRestant: green_coins[i].montantRestant - investment.amount
+                        montantRestant: green_coins[i].montantRestant - investment.montant
                     },
                     green_coins[i].id)
                     .then(() => console.log('update done'))
-                    investment.amount -= green_coins[i].montantRestant
+                    investment.montant -= green_coins[i].montantRestant
                 }
-                else if(green_coins[i].montantRestant < investment.amount){
-                    console.log("green_coins[i].montant_restant < investment.amount")
+                else if(green_coins[i].montantRestant < investment.montant){
+                    console.log("green_coins[i].montant_restant < investment.montant")
                     createOne(green_coins[i].montantRestant, investment.projetId, green_coins[i].id)
                     .then((message) => console.log(message))
-                    investment.amount -= green_coins[i].montantRestant
+                    investment.montant -= green_coins[i].montantRestant
                     updateGreenCoin({
                         montantRestant: 0
                     },
                     green_coins[i].id)
                     .then(() => console.log('update done'))
                 }
-                console.log(investment.amount)
-                if(investment.amount <= 0){
+                console.log(investment.montant)
+                if(investment.montant <= 0){
                     break;
                 }
             }

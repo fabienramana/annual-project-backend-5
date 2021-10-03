@@ -1,12 +1,12 @@
 const joi = require('@hapi/joi');
 
 const createModel = joi.object({
-    amount: joi.number().required(),
+    montant: joi.number().required(),
     projetId: joi.number().required(),
 });
 
 const updateModel = joi.object({
-    amount: joi.number(),
+    montant: joi.number(),
     projetId: joi.number(),
 });
 
