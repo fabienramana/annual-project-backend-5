@@ -10,11 +10,9 @@ module.exports = (rna) => {
         }
 
         const req = https.request(options, res =>{
-            console.log(`statusCode: ${res.statusCode}`)
 
             res.on('data', d => {
                 const data = JSON.parse(d)
-                console.log(JSON.parse(d));
                 if(data.message != null){
                     return reject(new Error("Le numéro RNA n'est pas valide"))
                 }
