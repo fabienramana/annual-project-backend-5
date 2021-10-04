@@ -39,10 +39,12 @@ module.exports = async (req, res, next) => {
         }
         items.push(item);
     });
+    const urlSuccess = 'http://localhost:4200/paiement/success?key='+achat.transactionId
+    const urlError = 'http://localhost:4200/paiement/error?key='+achat.transactionId
 
     console.log(JSON.stringify(items));
     try {
-        const url = await checkout(items, achat.transactionId);
+        const url = await checkout(items, urlSuccess, urlError);
         res.status(201).json( url ) 
     } catch(err){
         next(err);
