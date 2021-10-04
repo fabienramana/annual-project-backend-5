@@ -15,6 +15,6 @@ router.put('/validate-achat/:transactionId', checkIfUserIsMarchand, validateAcha
 
 router.put('/offre/statut/:id', checkIfUserIsMarchand, updateOfferStatus)
 
-router.put('/validate-vente/', checkIfUserIsTechnicien, validateVente)
+router.put('/validate-vente', checkIfUserIsTechnicien, validateVente)
 
 module.exports = router;

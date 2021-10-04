@@ -15,9 +15,10 @@ module.exports = async (id, statut) =>{
 
     if (statut == "Accepté"){
         await updateProduit({prix: prix_vente.prix + prix_vente.prix*0.3}, produit.id)
-        //const colisId = await createColis({ prix: prix_vente.prix*0.05, type: "Vente"})
+        const colisId = await createColis({ prix: prix_vente.prix*0.05, type: "Vente"})
+        console.log("colisId :" +colisId)
         await updateOffre({ statut: "Accepté"}, id)
-        await updateVente({statut: "En attente de produit", date: date_string}, vente.id)
+        await updateVente({statut: "En attente de produit", date: date_string, colisId}, vente.id)
     }
     else if (statut == "Refusé"){
         await updateOffre({ statut: "Refusé"}, id)
