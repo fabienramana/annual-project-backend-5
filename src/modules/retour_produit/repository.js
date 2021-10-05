@@ -3,7 +3,7 @@ const db = require('../../client/mysql')
 
 async function getRetoursByUserEmail(email){
     return new Promise(function(resolve, reject) {
-        var query = `SELECT r.*, p.titre, c.id as colisId, c.prix as colisPrix
+        var query = `SELECT r.*, p.titre, c.id as colisId, c.prix as colisPrix, c.numero as numero
         FROM retour_produit r, vente v, produit p, utilisateur u, colis c
         WHERE v.utilisateurId = u.id 
         AND r.colisId = c.id
