@@ -117,6 +117,23 @@ function getAllProducts(){
     })
 }
 
+async function getProduitsByDepot(id){
+    return new Promise(function(resolve,reject){
+        var query = `SELECT * FROM produit WHERE depotId = ${id}`;
+        db.query(query, function(err,result){
+            console.log(result)
+            console.log(err)
+            if(result.length > 0){
+                resolve(result)
+            }else if(result.length ==0){
+                resolve([])
+            }else{
+                reject(err)
+            }
+        })
+    })
+}
+
 async function insertProduitAndReturnId(product){
     return new Promise(function(resolve, reject){
         var query = `INSERT INTO produit (titre, description, etat, statut, categorieId) VALUES ("${product.titre}", "${product.description}", "${product.etat}", "${product.statut}", ${product.categorieId})`
@@ -166,5 +183,6 @@ module.exports = {
     getAllProducts,
     insertProduitAndReturnId,
     updateProduit,
-    findSellablesProduits
+    findSellablesProduits,
+    getProduitsByDepot
 }

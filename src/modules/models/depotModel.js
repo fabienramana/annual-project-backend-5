@@ -5,6 +5,7 @@ const createModel = joi.object({
     adresse: joi.string().required(),
     codePostal: joi.number().required(),
     ville: joi.string().required(),
+    capacite: joi.number().required(),
 });
 
 const updateModel = joi.object({
@@ -12,6 +13,7 @@ const updateModel = joi.object({
     adresse: joi.string(),
     codePostal: joi.number(),
     ville: joi.string(),
+    capacite: joi.number(),
 });
 
 

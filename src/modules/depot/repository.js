@@ -1,8 +1,8 @@
 const db = require('../../client/mysql')
 
-function createDepot(libelle, adresse, codePostal, ville){
+function createDepot(libelle, adresse, codePostal, ville, capacite){
     return new Promise(function(resolve, reject){
-        var query = `INSERT INTO depot (libelle, adresse, codePostal, ville) VALUES ("${libelle}", "${adresse}", "${codePostal}", "${ville}")`
+        var query = `INSERT INTO depot (libelle, adresse, codePostal, ville, capacite) VALUES ("${libelle}", "${adresse}", "${codePostal}", "${ville}", ${capacite})`
         db.query(query, function(err, result){
             if(err) reject(err)
             console.log(result)
@@ -87,11 +87,29 @@ function updateDepot(depotToUpdate, id){
     })
 }
 
+// SELECT depot WHERE capacite != 0
+async function getDepotsWithSpace(){
+    return new Promise(function(resolve,reject){
+        var userQuery = "SELECT * FROM depot WHERE capacite != 0";
+        db.query(userQuery, function(err,result){
+            if(result.length > 0){
+                resolve(result)
+            }else if(result.length == 0){
+                resolve([])
+            }
+            else{
+                reject(err)
+            }
+        })
+    })
+}
+
 module.exports = {
     createDepot,
     findIfLibelleExists,
     deleteDepot,
     findDepotById,
     getAllDepots,
-    updateDepot
+    updateDepot,
+    getDepotsWithSpace
 }

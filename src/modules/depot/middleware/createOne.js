@@ -5,9 +5,10 @@ module.exports = (req, res, next) => {
     const { adresse } = req.body;
     const { codePostal } = req.body;
     const { ville } = req.body;
+    const { capacite } = req.body;
 
 
-    createOne(libelle, adresse, codePostal, ville)
+    createOne(libelle, adresse, codePostal, ville, capacite)
         .then((status) => {
             res.status(201).json({
                 status
