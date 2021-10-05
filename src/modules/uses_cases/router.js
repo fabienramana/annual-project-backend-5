@@ -11,7 +11,7 @@ const router = new Router();
 
 router.post('/vente-produit', checkIfUserIsMarchand, createOfferProcess)
 
-router.put('/validate-achat/:transactionId', checkIfUserIsMarchand, validateAchat)
+router.put('/achat/validate', checkIfUserIsMarchand, validateAchat)
 
 router.put('/offre/statut/:id', checkIfUserIsMarchand, updateOfferStatus)
 

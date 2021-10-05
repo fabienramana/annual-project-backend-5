@@ -4,7 +4,7 @@ const updateOne = require("./updateOne");
 
 module.exports = async (key) => {
     const retour = await getRetourByTransactionId(key);
-    if(retour.status !== 'En attente') {
+    if(retour.statut !== 'En attente') {
         return "already done"
     }
     const status = {

@@ -2,10 +2,10 @@ const validateAchat = require('../service/validateAchat');
 const decodeToken = require('../../../services/decodeToken')
 
 module.exports = async (req, res, next) => {
-    const { transactionId } = req.params
+    const { transactionId } = req.body
     const user = decodeToken(req)
     console.log(user)
-    var email = user.email //a changer avec le token
+    var email = user.email
     console.log(transactionId)
     
     validateAchat(transactionId, email)
