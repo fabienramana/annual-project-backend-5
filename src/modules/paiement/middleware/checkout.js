@@ -6,8 +6,9 @@ const createAchatProduit = require('../../achat_produit/service/createOne')
 
 module.exports = async (req, res, next) => {
 
-    const{ ids } = req.body;
-    console.log(ids);
+    const ids = req.body;
+    console.log(req.body)
+    console.log("ids :" +ids);
     const itemsToGet = await findProduitsByIds(ids);  // get items by ids [0,2,3,.....]
     console.log(itemsToGet);
     const dateToday = new Date()

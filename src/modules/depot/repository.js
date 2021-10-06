@@ -41,7 +41,7 @@ function deleteDepot(id){
     })
 }
 
-function findDepotById(id){
+async function findDepotById(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM depot WHERE id = ?";
         db.query(query, id, function(err,result){
@@ -73,7 +73,7 @@ function getAllDepots(){
     })
 }
 
-function updateDepot(depotToUpdate, id){
+async function updateDepot(depotToUpdate, id){
     return new Promise(function(resolve, reject) {
         var query = `UPDATE depot SET ? WHERE id = ?`
         db.query(query,[depotToUpdate, id], function(err, result){
@@ -87,7 +87,7 @@ function updateDepot(depotToUpdate, id){
     })
 }
 
-// SELECT depot WHERE capacite != 0
+
 async function getDepotsWithSpace(){
     return new Promise(function(resolve,reject){
         var userQuery = "SELECT * FROM depot WHERE capacite != 0";
