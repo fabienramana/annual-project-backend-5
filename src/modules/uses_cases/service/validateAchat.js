@@ -9,12 +9,15 @@ const createGreenCoin = require('../../green_coin/service/createOne')
 
 module.exports = async (transactionId, email) =>{
     const achat = await findAchatByTransactionId(transactionId)
+    if(achat === null) {
+        return 'Achat non trouvé'
+    }
     const produitsAchats  = await findByAchatId(achat.id)
     const user = await findUserByEmail(email)
     var somme = 0;
 
     if(achat.statut == "Validé"){
-        throw new Error('Achat déjà effectué')
+        return 'Achat déjà effectué'
     }
     
     for(produitAchat of produitsAchats){   

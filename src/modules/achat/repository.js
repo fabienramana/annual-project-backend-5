@@ -85,17 +85,11 @@ async function findAchatByTransactionId(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM achat WHERE transactionId = ?";
         db.query(query, id, function(err,result){
-            console.log(result)
-            console.log(err)
-            if(result.length > 0){
-                resolve(result[0])
+            if(err) reject (err);
+            if(result.length == 0){
+                resolve(null)
             }
-            else if(result.length == 0){
-                reject(new Error('No record found'))
-            }
-            else{
-                reject(err)
-            }
+            resolve(result[0])
         })
     })
 }

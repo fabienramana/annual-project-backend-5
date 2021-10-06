@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
             price_data: {
                 currency: 'eur',
                 product_data: {
-                    name: obj.description
+                    name: obj.titre
                 },
                 unit_amount: (obj.prix * 100)
             },
