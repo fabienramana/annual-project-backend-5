@@ -102,7 +102,7 @@ function updateUser(userToUpdate, id){
     })
 }
 
-function getUsersByRole(role){
+async function getUsersByRole(role){
     return new Promise(function(resolve,reject){
         var query = `SELECT * FROM utilisateur WHERE role = "${role}"`;
         db.query(query, function(err,result){
@@ -139,5 +139,5 @@ module.exports = {
     updateUser,
     createUserWithRole,
     getUsersByRole,
-    deleteUser
+    deleteUser,
 }

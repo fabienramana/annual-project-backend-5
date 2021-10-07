@@ -94,6 +94,23 @@ async function findAchatByTransactionId(id){
     })
 }
 
+async function findAchatByStatut(statut){
+    return new Promise(function(resolve,reject){
+        var query = `SELECT * FROM achat WHERE statut = "${statut}"`;
+        db.query(query, function(err,result){
+            if(result.length > 0){
+                resolve(result)
+            }
+            else if(result.length == 0){
+                resolve([])
+            }
+            else{
+                reject(err)
+            }
+        })
+    })
+}
+
 async function updateAchat(achatToUpdate, id){
     return new Promise(function(resolve, reject) {
         db.query(`UPDATE achat SET ? WHERE id = ?`,[achatToUpdate, id], function(err, result){
@@ -115,5 +132,6 @@ module.exports = {
     getAll,
     getAllByUser,
     findAchatByTransactionId,
-    updateAchat
+    updateAchat,
+    findAchatByStatut
 }

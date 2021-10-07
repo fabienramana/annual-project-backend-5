@@ -51,6 +51,16 @@ async function findOffreByVenteId(id){
     })
 }
 
+async function findVentesByStatutAndVenteFinished(statut){
+    return new Promise(function(resolve,reject){
+        var query = `SELECT v.* FROM vente v LEFT JOIN offre o ON v.id = o.venteId WHERE o.statut = "${statut}" AND v.statut = "Terminé"`;
+        db.query(query, function(err,result){
+            if(err) reject(err);
+            resolve(result)
+        })
+    })
+}
+
 function findOffresByUserAndWaiting(email){
     return new Promise(function(resolve,reject){
         var query = `SELECT o.*, p.titre FROM offre o LEFT JOIN vente v ON v.id = o.venteId LEFT JOIN produit p ON p.id = v.produitId LEFT JOIN utilisateur u ON v.utilisateurId = u.id WHERE o.statut = 'En attente' AND u.email = "${email}"`;
@@ -66,5 +76,6 @@ module.exports = {
     updateOffre,
     findOffreById,
     findOffreByVenteId,
-    findOffresByUserAndWaiting
+    findOffresByUserAndWaiting,
+    findVentesByStatutAndVenteFinished
 }
