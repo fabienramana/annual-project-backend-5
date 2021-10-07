@@ -25,7 +25,7 @@ router.get('/ventes/en-cours', checkIfUserIsTechnicien, findOnHold)
 
 router.get('/ventes/annule', checkIfUserIsTechnicien, findFailed)
 
-router.get('/ventes/waiting-for-product', checkIfUserIsTechnicien, findOnDeliveryWait)
+router.get('/ventes/produit-en-attente', checkIfUserIsTechnicien, findOnDeliveryWait)
 
 router.get('/ventes/termine', checkIfUserIsTechnicien, findSuccess)
 
