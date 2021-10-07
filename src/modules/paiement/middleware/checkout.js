@@ -3,19 +3,22 @@ const { getProduitsByIds:findProduitsByIds} = require('../../produit/repository'
 const bcrypt = require('bcrypt')
 const createAchat = require('../../achat/service/createOne')
 const createAchatProduit = require('../../achat_produit/service/createOne')
+const decodeToken = require('../../../services/decodeToken');
+const { findUserByEmail } = require('../../user/repository');
 
 module.exports = async (req, res, next) => {
 
     const ids = req.body;
-    console.log(req.body)
-    console.log("ids :" +ids);
-    const itemsToGet = await findProduitsByIds(ids);  // get items by ids [0,2,3,.....]
+    const token = decodeToken(req)
+    const user = await findUserByEmail(token.email);
+    console.log(user);
+    const itemsToGet = await findProduitsByIds(ids);
     console.log(itemsToGet);
     const dateToday = new Date()
     const date_string = dateToday.getFullYear() + "-" + (dateToday.getMonth() +1) + "-" + dateToday.getDate()
     const achat = {
         date: date_string,
-        utilisateurId: 1,
+        utilisateurId: user.id,
         transactionId:  bcrypt.hashSync(Date.now().toString(), 10)
     }
     console.log(achat);

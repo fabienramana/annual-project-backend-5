@@ -7,16 +7,16 @@ module.exports = async (email) => {
     const achatsToReturn = [];
     const user = await findUserByEmail(email);
     const achats = await getAllByUser(user.id);
-    for(let i=0;i<achats.length;i++){
-        let achats_produits = await findByAchatId(achats[i].id);
-        for(let j=0;j<achats_produits.length;j++){
-            let produit = await findProduitById(achats_produits[i].produitId)
+    for await (const achat of achats) {
+        const achatProduits = await findByAchatId(achat.id);
+        for await (const achatProduit of achatProduits) {
+            const produit = await findProduitById(achatProduit.produitId)
             achatsToReturn.push({
-                date: achats[i].date,
+                date: achat.date,
                 prix: produit.prix,
                 titre: produit.titre,
-                statut: achats[i].statut
-            })
+                statut: achat.statut
+            });
         }
     }
     return achatsToReturn;
