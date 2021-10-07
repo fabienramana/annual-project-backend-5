@@ -64,16 +64,8 @@ function getAllVentesByUser(id){
     return new Promise(function(resolve,reject){
         var userQuery = "SELECT v.*, p.titre FROM vente v LEFT JOIN produit p ON p.id = v.produitId WHERE utilisateurId = ?";
         db.query(userQuery, id, function(err,result){
-            console.log(result)
-            console.log(err)
-            if(result.length > 0){
-                resolve(result)
-            }
-            else if(result.length ==0){
-                resolve([])
-            }else{
-                reject(err)
-            }
+            if(err) reject(err);
+            resolve(result)
         })
     })
 }

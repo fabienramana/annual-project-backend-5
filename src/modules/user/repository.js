@@ -37,7 +37,6 @@ async function findUserByEmail(email){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM utilisateur WHERE email = ?";
         db.query(query, email, function(err,result){
-            console.log(result)
             if(result.length > 0){
                 resolve(result[0])
             }else if(err){
