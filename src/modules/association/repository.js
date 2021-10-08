@@ -49,8 +49,6 @@ function deleteAssociation(id){
     return new Promise(function(resolve, reject) {
         var query = `DELETE FROM association WHERE id = ${id}`
         db.query(query, function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('deleted')
         })
@@ -74,13 +72,14 @@ async function getAllAssociations(){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM association";
         db.query(query, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }
             else if(result.length == 0){
                 resolve([])
-            }else if (err){
-                reject(err)
             }
         })
     })

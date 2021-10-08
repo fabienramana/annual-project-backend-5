@@ -4,8 +4,6 @@ function createCaracTechnique(caracTechnique){
     return new Promise(function(resolve, reject){
         var query = `INSERT INTO caracteristiques_technique (libelle, uniteId, categorieId) VALUES ("${caracTechnique.libelle}", ${caracTechnique.uniteId}, ${caracTechnique.categorieId})`
         db.query(query, function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('created')
             else{
@@ -29,14 +27,14 @@ async function getAllCaracTechnique(){
     return new Promise(function(resolve,reject){
         var userQuery = "SELECT * FROM caracteristiques_technique";
         db.query(userQuery, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }
             else if(result.length == 0){
                 resolve([])
-            }
-            else{
-                reject(err)
             }
         })
     })
@@ -45,8 +43,6 @@ async function getAllCaracTechnique(){
 function updateCaracTechnique(caracTechnique, id){
     return new Promise(function(resolve, reject) {
         db.query(`UPDATE caracteristiques_technique SET ? WHERE id = ?`,[caracTechnique, id], function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('updated')
             else{
@@ -60,14 +56,14 @@ function findCaracTechniqueById(id){
     return new Promise(function(resolve,reject){
         var userQuery = "SELECT * FROM caracteristiques_technique WHERE id = ?";
         db.query(userQuery, id, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result[0])
             }
             else if(result.length == 0){
                 reject(new Error('No record found'))
-            }
-            else{
-                reject(err)
             }
         })
     })

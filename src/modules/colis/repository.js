@@ -4,13 +4,13 @@ function getAllColis(){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM colis";
         db.query(query, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }else if(result.length == 0){
                 resolve([])
-            }
-            else{
-                reject(err)
             }
         })
     })
@@ -22,8 +22,6 @@ async function createColis(number, date, prix, type){
         var query = `INSERT INTO colis (numero, date, prix, type) VALUES ("${number}", "${date}", ${prix}, "${type}")`
         
         db.query(query, function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve(result.insertId)
             else{

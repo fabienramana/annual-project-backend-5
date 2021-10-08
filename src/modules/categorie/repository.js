@@ -6,7 +6,6 @@ function createCategorie(libelle){
     return new Promise(function(resolve, reject) {
         db.query(query, function(err, result){
             if(err) reject(err)
-            console.log(result)
             if(result.affectedRows == 1){
                 pushNotif(libelle)
                 resolve('created')
@@ -19,14 +18,14 @@ function getAllCategories(){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM categorie";
         db.query(query, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }
             else if(result.length == 0){
                 resolve([])
-            }
-            else{
-                reject(err)
             }
         })
     })
@@ -63,8 +62,6 @@ function updateCategorie(categorie, id){
     return new Promise(function(resolve, reject) {
         var query = `UPDATE categorie SET ? WHERE id = ?`
         db.query(query,[categorie, id], function(err, result){
-            console.log(err)
-            console.log(result)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('updated')
             else{
@@ -78,14 +75,14 @@ function findCategorieById(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM categorie WHERE id = ?";
         db.query(query, id, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result[0])
             }
             else if(result.length == 0){
                 reject(new Error('No record found'))
-            }
-            else{
-                reject(err)
             }
         })
     })
