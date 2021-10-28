@@ -9,12 +9,13 @@ const checkIfUserIsMarchand = require('../../services/checkIfUserIsMarchand');
 
 const router = new Router();
 
-router.get('/categories', checkIfUserIsMarchand, getAll)
 
-router.post('/categorie', checkIfUserIsTechnicien, createCategorie)
+router.post('/categorie', createCategorie)
 
 router.put('/categorie/:id', checkIfUserIsTechnicien, updateOne)
 
 router.delete('/categorie/:id', checkIfUserIsTechnicien, deleteOne)
+
+router.get('/categories', getAll)
 
 module.exports = router;

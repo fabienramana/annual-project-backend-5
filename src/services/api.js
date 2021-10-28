@@ -38,11 +38,11 @@ router.use('/api', basicsRouter);
 router.use('/api', userNoRequirementRouter);
 router.use('/api', productNoRequirementRouter);
 router.use('/api', associationNoRequirementRouter);
+router.use('/api', categorieRouter);
 router.use(assignToken)
 router.use(verifyToken)
 router.use('/api', adminRouter)
 router.use('/api', userRouter);
-router.use('/api', categorieRouter);
 router.use('/api', depotRouter)
 router.use('/api', uniteRouter)
 router.use('/api', caracteristique_techRouter)

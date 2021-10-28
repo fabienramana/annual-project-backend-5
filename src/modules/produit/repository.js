@@ -53,13 +53,11 @@ async function findProduitById(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM produit WHERE id = ?";
         db.query(query, id, function(err,result){
+            if(err) reject(err)
             if(result.length > 0){
                 resolve(result[0])
             }else if(result.length ==0){
                 reject(new Error('No record found'))
-            }
-            else{
-                reject(err)
             }
         })
     })
