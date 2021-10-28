@@ -4,8 +4,6 @@ function createAchatProduit(achatId, produitId){
     return new Promise(function(resolve, reject){
         var query = `INSERT INTO achat_produit (achatId, produitId) VALUES (${achatId}, ${produitId})`
         db.query(query, function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('created')
             else{

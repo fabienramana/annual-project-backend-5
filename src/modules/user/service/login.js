@@ -4,7 +4,7 @@ module.exports = (email) => {
     return new Promise(function(resolve,reject){
         var userQuery = "SELECT * FROM utilisateur WHERE email = ?";
         db.query(userQuery, email, function(err,result){
-            console.log(result)
+            
             if(result.length > 0){
                 console.log('resolve')
                 resolve(result[0])

@@ -6,7 +6,6 @@ function createCategorie(libelle){
     return new Promise(function(resolve, reject) {
         db.query(query, function(err, result){
             if(err) reject(err)
-            console.log(result)
             if(result.affectedRows == 1){
                 pushNotif(libelle)
                 resolve('created')
@@ -59,12 +58,9 @@ function deleteCategorie(id){
 }
 
 function updateCategorie(categorie, id){
-    console.log(categorie, id)
     return new Promise(function(resolve, reject) {
         var query = `UPDATE categorie SET ? WHERE id = ?`
         db.query(query,[categorie, id], function(err, result){
-            console.log(err)
-            console.log(result)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('updated')
             else{

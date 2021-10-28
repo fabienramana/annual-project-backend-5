@@ -5,7 +5,7 @@ function createDepot(libelle, adresse, codePostal, ville, capacite){
         var query = `INSERT INTO depot (libelle, adresse, codePostal, ville, capacite) VALUES ("${libelle}", "${adresse}", "${codePostal}", "${ville}", ${capacite})`
         db.query(query, function(err, result){
             if(err) reject(err)
-            console.log(result)
+            
             if(result.affectedRows == 1)resolve('created')
             else{
                 reject(new Error('Insert failed'))
@@ -76,7 +76,7 @@ async function updateDepot(depotToUpdate, id){
         var query = `UPDATE depot SET ? WHERE id = ?`
         db.query(query,[depotToUpdate, id], function(err, result){
             if(err) reject(err)
-            console.log(result)
+            
             if(result.affectedRows == 1)resolve('updated')
             else{
                 reject(new Error('Update failed'))

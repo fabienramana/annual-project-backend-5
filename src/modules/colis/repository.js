@@ -22,8 +22,6 @@ async function createColis(number, date, prix, type){
         var query = `INSERT INTO colis (numero, date, prix, type) VALUES ("${number}", "${date}", ${prix}, "${type}")`
         
         db.query(query, function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve(result.insertId)
             else{
@@ -58,7 +56,6 @@ function deleteColisById(id){
 
 function findIfNumeroExists(numero){
     db.query('SELECT * FROM colis WHERE numero = ?', numero, function(error, results, fields){
-        console.log(results)
         if(results != null && results.length > 0){
             return true
         }

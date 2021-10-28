@@ -5,8 +5,6 @@ function createPrixVente(prix_vente){
     return new Promise(function(resolve, reject){
         var query = `INSERT INTO prix_vente (titre, prix, categorieId) VALUES ("${prix_vente.titre}", ${prix_vente.prix}, ${prix_vente.categorieId})`
         db.query(query, function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve("created")
             else reject(new Error('Insert failed'))
@@ -60,8 +58,6 @@ function updatePrixVente(prixVenteToUpdate, id){
     return new Promise(function(resolve, reject) {
         var query = `UPDATE prix_vente SET ? WHERE id = ?`
         db.query(query,[prixVenteToUpdate, id], function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('updated')
             else reject(new Error('Update failed'))

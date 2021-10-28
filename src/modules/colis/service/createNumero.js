@@ -5,6 +5,6 @@ module.exports = () => {
     for ( var i = 0; i < 15; i++ ) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    console.log(result)
+    
     return result;
 }

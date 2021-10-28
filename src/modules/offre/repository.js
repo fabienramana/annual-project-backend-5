@@ -3,7 +3,18 @@ const db = require('../../client/mysql')
 async function createOffre(date_string, price, venteId){
     var query = `INSERT INTO offre (date, prix, statut, venteId) VALUES ("${date_string}", "${price}", "En attente", ${venteId})`
     db.query(query, function(err, result){
-        console.log(result)
+        
+        console.log(err)
+        if(err) throw err
+        if(result.affectedRows == 1) return "created"
+        else reject(new Error('Insert failed'))
+    })
+}
+
+async function createContreOffre(date_string, price, venteId){
+    var query = `INSERT INTO offre (date, prix, statut, type, venteId) VALUES ("${date_string}", "${price}", "En attente", "Contre Offre", ${venteId})`
+    db.query(query, function(err, result){
+        
         console.log(err)
         if(err) throw err
         if(result.affectedRows == 1) return "created"
@@ -15,8 +26,6 @@ async function updateOffre(offreToUpdate, id){
     return new Promise(function(resolve, reject) {
         var query = `UPDATE offre SET ? WHERE id = ?`
         db.query(query,[offreToUpdate, id], function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('updated')
             else reject(new Error('Update failed'))
@@ -77,5 +86,6 @@ module.exports = {
     findOffreById,
     findOffreByVenteId,
     findOffresByUserAndWaiting,
-    findVentesByStatutAndVenteFinished
+    findVentesByStatutAndVenteFinished,
+    createContreOffre
 }

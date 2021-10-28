@@ -4,8 +4,6 @@ function createProject(projet){
     return new Promise(function(resolve, reject){
         var query = `INSERT INTO projet (libelle, description, somme, dateDebut, dateFin, associationId) VALUES ("${projet.libelle}", "${projet.description}", ${projet.somme}, "${projet.dateDebut}", "${projet.dateFin}", ${projet.associationId})`
         db.query(query, function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve("created")
             else reject(new Error('Insert failed'))
@@ -17,8 +15,6 @@ function findProjetById(id){
     return new Promise(function(resolve,reject){
         var userQuery = "SELECT * FROM projet WHERE id = ?";
         db.query(userQuery, id, function(err,result){
-            console.log(result)
-            console.log(err)
             if(result.length > 0){
                 resolve(result[0])
             }else if(result.length ==0){

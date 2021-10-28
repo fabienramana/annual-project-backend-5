@@ -11,7 +11,6 @@ module.exports = (investment, email) => {
     .then((user) => findByUser(user.id))
     .then((gc) => {
         return new Promise(function(resolve, reject){
-            console.log("length" + gc.length)
             var montant = 0;
             for(let i=0;i<gc.length;i++){
                 montant += gc[i].montantRestant
@@ -26,7 +25,6 @@ module.exports = (investment, email) => {
     .then(()=> createModel.validate(investment))
     .then(function(){
         return new Promise(function(resolve, reject){
-            console.log("gc length"+green_coins.length)
             for(let i=0; i<green_coins.length;i++){
                 if(green_coins[i].montantRestant == investment.montant){
                     console.log("equal")

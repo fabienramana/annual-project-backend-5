@@ -4,8 +4,6 @@ function createCaracTechnique(caracTechnique){
     return new Promise(function(resolve, reject){
         var query = `INSERT INTO caracteristiques_technique (libelle, uniteId, categorieId) VALUES ("${caracTechnique.libelle}", ${caracTechnique.uniteId}, ${caracTechnique.categorieId})`
         db.query(query, function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('created')
             else{
@@ -45,8 +43,6 @@ async function getAllCaracTechnique(){
 function updateCaracTechnique(caracTechnique, id){
     return new Promise(function(resolve, reject) {
         db.query(`UPDATE caracteristiques_technique SET ? WHERE id = ?`,[caracTechnique, id], function(err, result){
-            console.log(result)
-            console.log(err)
             if(err) reject(err)
             if(result.affectedRows == 1)resolve('updated')
             else{
