@@ -37,7 +37,7 @@ module.exports = async () => {
         numberOfUsers: users.length,
         numberOfInWait: inWait.length,
         numberOfSuccessVentes: successVentes.length,
-        numberOfSuccessAchats: successAchats.length,
+        numberOfSuccessAchats: nbrAchats,
         sommeVente,
         sommeAchat
     }
