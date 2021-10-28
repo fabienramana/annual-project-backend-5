@@ -17,13 +17,13 @@ async function findByAchatId(achatId){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM achat_produit WHERE achatId = ?";
         db.query(query, achatId, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }else if(result.length == 0){
                 resolve([])
-            }
-            else{
-                reject(err)
             }
         })
     })
@@ -33,13 +33,13 @@ function findByProduitId(produitId){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM achat_produit WHERE produitId = ?";
         db.query(query, produitId, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }else if(result.length == 0){
                 resolve([])
-            }
-            else{
-                reject(err)
             }
         })
     })

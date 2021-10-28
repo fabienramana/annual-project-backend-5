@@ -35,14 +35,11 @@ async function findUserByEmail(email){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM utilisateur WHERE email = ?";
         db.query(query, email, function(err,result){
-            if(result.length > 0){
-                resolve(result[0])
-            }else if(err){
-                reject(err)
+            if(err) reject(err)
+            if(result.length === 0) {
+                resolve(null);
             }
-            else{
-                reject(new Error("L'email n'existe pas"))
-            }
+            resolve(result[0])
         })
     })
 }

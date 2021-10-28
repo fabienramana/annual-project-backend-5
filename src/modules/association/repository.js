@@ -59,14 +59,11 @@ function findOneByEmail(email){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM association WHERE email = ?";
         db.query(query, email, function(err,result){
-            if(result.length > 0){
-                resolve(result[0])
-            }else if (err){
-                reject(err)
+            if(err) reject(err)
+            if(result.length === 0) {
+                resolve(null);
             }
-            else{
-                reject(new Error("L'email n'existe pas"))
-            }
+            resolve(result[0])
         })
     })
 }
@@ -75,13 +72,14 @@ async function getAllAssociations(){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM association";
         db.query(query, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }
             else if(result.length == 0){
                 resolve([])
-            }else if (err){
-                reject(err)
             }
         })
     })

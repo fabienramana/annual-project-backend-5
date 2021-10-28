@@ -4,13 +4,13 @@ function getAllColis(){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM colis";
         db.query(query, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }else if(result.length == 0){
                 resolve([])
-            }
-            else{
-                reject(err)
             }
         })
     })

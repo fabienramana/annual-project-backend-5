@@ -28,14 +28,14 @@ function findOneById(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM achat WHERE id = ?";
         db.query(query, id, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result[0])
             }
             else if(result.length == 0){
                 reject(new Error('No record found'))
-            }
-            else{
-                reject(err)
             }
         })
     })
@@ -45,14 +45,14 @@ function getAll(){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM achat";
         db.query(query, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }
             else if(result.length == 0){
                 resolve([])
-            }
-            else{
-                reject(err)
             }
         })
     })
@@ -62,14 +62,14 @@ function getAllByUser(id){
     return new Promise(function(resolve,reject){
         var userQuery = "SELECT * FROM achat WHERE utilisateurId = ?";
         db.query(userQuery, id, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }
             else if(result.length == 0){
                 resolve([])
-            }
-            else{
-                reject(err)
             }
         })
     })
@@ -92,14 +92,14 @@ async function findAchatByStatut(statut){
     return new Promise(function(resolve,reject){
         var query = `SELECT * FROM achat WHERE statut = "${statut}"`;
         db.query(query, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }
             else if(result.length == 0){
                 resolve([])
-            }
-            else{
-                reject(err)
             }
         })
     })

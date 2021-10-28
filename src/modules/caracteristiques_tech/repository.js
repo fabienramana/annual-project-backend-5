@@ -27,14 +27,14 @@ async function getAllCaracTechnique(){
     return new Promise(function(resolve,reject){
         var userQuery = "SELECT * FROM caracteristiques_technique";
         db.query(userQuery, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result)
             }
             else if(result.length == 0){
                 resolve([])
-            }
-            else{
-                reject(err)
             }
         })
     })
@@ -56,14 +56,14 @@ function findCaracTechniqueById(id){
     return new Promise(function(resolve,reject){
         var userQuery = "SELECT * FROM caracteristiques_technique WHERE id = ?";
         db.query(userQuery, id, function(err,result){
-            if(result.length > 0){
+            if(err){
+                reject(err)
+            }
+            else if(result.length > 0){
                 resolve(result[0])
             }
             else if(result.length == 0){
                 reject(new Error('No record found'))
-            }
-            else{
-                reject(err)
             }
         })
     })

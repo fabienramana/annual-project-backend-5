@@ -2,33 +2,32 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { findUserByEmail } = require('../repository')
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     console.log(req.body.email)
-    findUserByEmail(req.body.email)
-    .then((returnedUser) => {
-        bcrypt.compare(req.body.password, returnedUser.password, (err, res2)=> {
+
+    try {
+        const user = await findUserByEmail(req.body.email);
+        if(user === null) {
+            return res.status(401).send('Email ou mot de passe incorrect')
+        }
+        bcrypt.compare(req.body.password, user.password, (err, res2)=> {
             if (res2 === true) {
-                var user = {
-                    email: returnedUser.email,
-                    role: returnedUser.role
+                var infos = {
+                    email: user.email,
+                    role: user.role
                 }
-                jwt.sign( user , 'secretKey', { expiresIn: '1440m' }, (errJWT, token) => {
-                    res.json({
+                jwt.sign( infos , 'secretKey', { expiresIn: '1440m' }, (errJWT, token) => {
+                    return res.json({
                         token,
                     });
                 });
             } else if (res2 === false) {
-                res.json({
-                    error: "Erreur lors de l'authentification",
-                });
+                return res.status(401).send('Email ou mot de passe incorrect')
             } else if (err) {
-                res.json({
-                    error: "Erreur lors de l'authentification",
-                });
+                return res.status(500).send('Erreur lors de l\'authentification')
             }
         });
-    })
-    .catch((errFinal) => {
+    } catch(errFinal) {
         next(errFinal);
-    });
+    }
 };
