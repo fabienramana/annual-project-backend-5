@@ -12,6 +12,7 @@ module.exports = async () => {
     const inWait = await getUsersByRole("En attente")
     const successVentes = await findVentesByStatutAndVenteFinished("Accepté")
     const successAchats = await findAchatByStatut("Validé")
+    let nbrAchats = 0;
 
 
 
@@ -26,6 +27,7 @@ module.exports = async () => {
         for(let j=0;j<achat_produits.length;j++){
             let produit = await findProduitById(achat_produits[j].produitId)
             sommeAchat += produit.prix
+            nbrAchats +=1;
         }
     }
 
