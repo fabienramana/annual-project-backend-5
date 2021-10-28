@@ -86,7 +86,6 @@ async function getAllAssociations(){
 }
 
 async function getOneByEmail(email) {
-    console.log(email);
     return new Promise(function(resolve, reject)  {
         var query = "SELECT * FROM association WHERE email = ?"
         db.query(query, email, function(error, results){

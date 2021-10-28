@@ -1,12 +1,16 @@
 const { findSellablesProduits } = require('../repository');
+const { findImagesByProduitId } = require('../../image/repository');
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
 
-    findSellablesProduits()
-    .then((produits) => {
-        res.json(produits)
-    })
-    .catch((err)=> {
-        next(err)
-    })
+    try {
+        const produits = await findSellablesProduits();
+        for await (const produit of produits) {
+            const images = await findImagesByProduitId(produit.id);
+            produit.images = images
+        }
+        res.json(produits);
+    } catch (err) {
+        next(err);
+    }
 }

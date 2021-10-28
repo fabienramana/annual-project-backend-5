@@ -3,7 +3,6 @@ const createNumero = require('./createNumero');
 const { createColis, findIfNumeroExists } = require('../repository');
 
 module.exports = async (colis) => {
-    console.log(colis)
     const dateToday = new Date()
     const date_string = dateToday.getFullYear() + "-" + (dateToday.getMonth() +1) + "-" + dateToday.getDate()
     

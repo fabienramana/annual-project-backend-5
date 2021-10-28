@@ -1,4 +1,4 @@
-const { createOffre, updateOffre, findOffreByVenteId } = require('../repository')
+const { updateOffre, findOffreByVenteId, createContreOffre } = require('../repository')
 const { findVenteById } = require('../../vente/repository')
 
 module.exports = async (id, prix) => {
@@ -9,6 +9,6 @@ module.exports = async (id, prix) => {
     const offres = await findOffreByVenteId(vente.id)
     console.log(offres[0].id)
     await updateOffre({statut: "Refusé"}, offres[0].id)
-    await createOffre(date_string, prix, vente.id)
+    await createContreOffre(date_string, prix, vente.id)
     return "done"
 }

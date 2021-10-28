@@ -4,8 +4,6 @@ function findOneById(id){
     return new Promise(function(resolve,reject){
         var query = "SELECT * FROM utilisateur WHERE id = ?";
         db.query(query, id, function(err,result){
-            console.log(result)
-            console.log(err)
             if(result.length > 0){
                 resolve(result[0])
             }else if(result.length ==0){
@@ -90,7 +88,7 @@ function updateUser(userToUpdate, id){
         var query = `UPDATE utilisateur SET ? WHERE id = ?`
         db.query(query, [userToUpdate, id], function(err, result){
             console.log(err)
-            console.log(result)
+            
             if(err) reject(err)
             if(result.affectedRows >0) resolve('ok')
             else reject(new Error('Update failed'))
@@ -102,8 +100,6 @@ async function getUsersByRole(role){
     return new Promise(function(resolve,reject){
         var query = `SELECT * FROM utilisateur WHERE role = "${role}"`;
         db.query(query, function(err,result){
-            console.log(result)
-            console.log(err)
             if(result.length > 0){
                 resolve(result)
             }else if(result.length ==0){

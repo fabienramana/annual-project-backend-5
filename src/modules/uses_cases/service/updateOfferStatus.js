@@ -4,6 +4,7 @@ const {findProduitById, updateProduit} = require('../../produit/repository')
 const {findPrixVenteByTitre} = require('../../prix_vente/repository')
 const { getDepotsWithSpace, updateDepot } = require('../../depot/repository')
 const createColis = require('../../colis/service/createOne')
+const createRetour = require('../../retour_produit/service/createRetour')
 
 module.exports = async (id, statut) =>{
     const dateToday = new Date()
@@ -33,9 +34,13 @@ module.exports = async (id, statut) =>{
         await updateDepot({capacite: capacite-1}, depotId)
     }
     else if (statut == "Refusé"){
-        await updateOffre({ statut: "Refusé"}, id)
-        await updateProduit({statut: "Non valide"}, produit.id)
-        await updateVente({statut: "Terminé", date: date_string}, vente.id)
+        // await updateOffre({ statut: "Refusé"}, id)
+        // await updateVente({statut: "Terminé", date: date_string}, vente.id)
+        // await updateProduit({statut: "Non valide"}, produit.id)
+        if(offre.type = 'Contre Offre') {
+            console.log('test')
+            await createRetour(id);
+        }
     }
 
     return "done"

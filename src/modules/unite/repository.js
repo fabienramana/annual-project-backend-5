@@ -5,7 +5,7 @@ function createUnite(libelle, abreviation, type){
         var query = `INSERT INTO unite (libelle, abreviation, type) VALUES ("${libelle}", "${abreviation}", "${type}")`
         db.query(query, function(err, result){
             if(err) reject(err)
-            console.log(result)
+            
             if(result.affectedRows == 1)resolve('created')
             else reject(new Error('Insert failed'))
         })        
@@ -60,7 +60,7 @@ function updateUnite(uniteToUpdate, id){
         var query = `UPDATE unite SET ? WHERE id = ?`
         db.query(query,[uniteToUpdate, id], function(err, result){
             if(err) reject(err)
-            console.log(result)
+            
             if(result.affectedRows == 1)resolve('updated')
             else reject(new Error('Update failed'))
         })

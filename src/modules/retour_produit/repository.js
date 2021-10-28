@@ -4,12 +4,12 @@ const db = require('../../client/mysql')
 async function getRetoursByUserEmail(email){
     return new Promise(function(resolve, reject) {
         var query = `SELECT r.*, p.titre, c.id as colisId, c.prix as colisPrix, c.numero as numero
-        FROM retour_produit r, vente v, produit p, utilisateur u, colis c
-        WHERE v.utilisateurId = u.id 
-        AND r.colisId = c.id
-        AND r.venteId = v.id 
-        AND v.produitId = p.id
-        AND u.email = '${email}'`
+        FROM retour_produit r
+		LEFT JOIN colis c ON c.id = r.colisId
+		LEFT JOIN vente v ON r.venteId = v.id 
+        LEFT JOIN utilisateur u ON v.utilisateurId = u.id 
+        LEFT JOIN produit p ON v.produitId = p.id
+        WHERE u.email = '${email}'`
         db.query(query, function(err, result){
             if(err) reject(err)
             if(result) resolve(result)
@@ -20,11 +20,11 @@ async function getRetoursByUserEmail(email){
 async function getRetourById(id){
     return new Promise(function(resolve, reject) {
         var query = `SELECT r.*, p.titre, c.id as colisId, c.prix as prix
-        FROM retour_produit r, vente v, produit p, colis c
-        WHERE r.id = ${id}
-        AND r.colisId = c.id
-        AND r.venteId = v.id 
-        AND v.produitId = p.id`
+        FROM retour_produit r
+        LEFT JOIN colis c ON c.id = r.colisId
+		LEFT JOIN vente v ON r.venteId = v.id 
+        LEFT JOIN produit p ON v.produitId = p.id
+        WHERE r.id = ${id}`
         db.query(query, function(err, result){
             if(err) reject(err)
             if(result) resolve(result[0])
@@ -42,9 +42,9 @@ async function getRetourByTransactionId(key) {
     })
 }
 
-async function createRetour(venteId){
+async function createRetour(venteId, colisId){
     return new Promise(function(resolve, reject){
-        var query = `INSERT INTO retour_produit (venteId, statut) VALUES ("${venteId}", "En attente")`
+        var query = `INSERT INTO retour_produit (venteId, statut, colisId) VALUES ("${venteId}", "En attente", "${colisId}")`
         db.query(query, function(err, result){
             if(err) reject(err)
             if(result.affectedRows == 1)resolve("created")

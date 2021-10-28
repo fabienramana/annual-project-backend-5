@@ -58,7 +58,6 @@ function deleteCategorie(id){
 }
 
 function updateCategorie(categorie, id){
-    console.log(categorie, id)
     return new Promise(function(resolve, reject) {
         var query = `UPDATE categorie SET ? WHERE id = ?`
         db.query(query,[categorie, id], function(err, result){

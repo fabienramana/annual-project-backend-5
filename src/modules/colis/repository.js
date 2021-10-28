@@ -56,7 +56,6 @@ function deleteColisById(id){
 
 function findIfNumeroExists(numero){
     db.query('SELECT * FROM colis WHERE numero = ?', numero, function(error, results, fields){
-        console.log(results)
         if(results != null && results.length > 0){
             return true
         }
